@@ -42,6 +42,7 @@ const Products = () => {
                         <tr>
                             <th>id</th>
                             <th>title</th>
+                            <th>Category name</th>
                             <th>slug</th>
                             <th>description</th>
                             <th>original price</th>
@@ -57,6 +58,7 @@ const Products = () => {
                             <tr key={d.id}>
                                 <td>{d.id}</td>
                                 <td>{d.title}</td>
+                                <td>{d.category.title}</td>
                                 <td>{d.slug}</td>
                                 <td>{d.description}</td>
                                 <td>{d.original_price}</td>

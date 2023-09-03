@@ -43,7 +43,7 @@ class CategoryController extends Controller
     }
     public function show($id)
     {
-        $data = Category::where('id', $id)->first();
+        $data = Category::find($id);
         return response()->json(['data' => $data, 'message' => 'single categories'], 200);
     }
     public function update(Request $request, Category $category)

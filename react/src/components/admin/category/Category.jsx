@@ -11,7 +11,6 @@ const Category = () => {
         axiosClient
             .get("/category")
             .then(({ data }) => {
-                console.log(data.data);
                 setfetchedData(data.data);
             })
             .catch((error) => {
@@ -23,7 +22,6 @@ const Category = () => {
         axiosClient
             .get("/category")
             .then(({ data }) => {
-                console.log(data.data);
                 setfetchedData(data.data);
                 setLoading(false);
             })
