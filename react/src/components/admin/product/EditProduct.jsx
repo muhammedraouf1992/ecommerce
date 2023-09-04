@@ -1,96 +1,94 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axiosClient from "../../../axios";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-const EditProduct = () => {
-    const params = useParams();
-    const [singleProduct, setSingleProduct] = useState({});
-    const [categoryList, setCategoryList] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [inputImage, setInputImage] = useState();
-    const navigate = useNavigate();
-    useEffect(() => {
-        setLoading(true);
-        axiosClient
-            .get("/visible")
-            .then(({ data }) => {
-                setCategoryList(data.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
+import axiosClient from "../../../axios";
+import { useParams } from "react-router-dom";
 
+const EditProduct = () => {
+    const [categoryList, setCategoryList] = useState([]);
+    const [inputImage, setInputImage] = useState();
+    const [loading, setLoading] = useState(false);
+    const [checked, setChecked] = useState([]);
+    const [inputData, setInputData] = useState({});
+
+    const params = useParams();
+    useEffect(() => {
+        // axiosClient
+        //     .get("/visible")
+        //     .then(({ data }) => {
+        //         setCategoryList(data.data);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+        setLoading(true);
         axiosClient
             .get(`/product/${params.id}`)
             .then(({ data }) => {
-                console.log(data);
-                setSingleProduct(data.data);
+                console.log(data.data);
+                setInputData(data.data);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
+                setLoading(false);
             });
     }, []);
 
     const handleChange = (e) => {
-        setSingleProduct({
-            ...singleProduct,
+        setInputData({
+            ...inputData,
             [e.target.name]: e.target.value,
-            status: e.target.checked,
-            popular: e.target.checked,
-            featured: e.target.checked,
         });
     };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-
-        formData.append("category_id", singleProduct.category_id);
-        formData.append("title", singleProduct.title);
-        formData.append("slug", singleProduct.slug);
-        formData.append("description", singleProduct.description);
-        formData.append("meta_title", singleProduct.meta_title);
-        formData.append("meta_description", singleProduct.meta_description);
-        formData.append("meta_keyword", singleProduct.meta_keyword);
-        formData.append("status", singleProduct.status);
-        formData.append("popular", singleProduct.popular);
-        formData.append("featured", singleProduct.featured);
-        formData.append("original_price", singleProduct.original_price);
-        formData.append("selling_price", singleProduct.selling_price);
-        if (inputImage) {
-            formData.append("image", inputImage.image);
-        }
-        formData.append("qty", singleProduct.qty);
-        formData.append("brand", singleProduct.brand);
-
-        axiosClient
-            .put(`/product/${params.id}`)
-            .then((data) => {
-                navigate("/admin/product");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    const handleCheck = (e) => {
+        setChecked({ ...checked, [e.target.name]: e.target.checked });
     };
     const handleImage = (e) => {
         setInputImage({ image: e.target.files[0] });
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+
+        formData.append("category_id", 11);
+        formData.append("title", inputData.title);
+        formData.append("slug", inputData.slug);
+        formData.append("description", inputData.description);
+        formData.append("meta_title", inputData.meta_title);
+        formData.append("meta_description", inputData.meta_description);
+        formData.append("meta_keywords", inputData.meta_keywords);
+        formData.append("status", checked.status ? "1" : "0");
+        formData.append("popular", checked.popular ? "1" : "0");
+        formData.append("featured", checked.featured ? "1" : "0");
+        formData.append("original_price", inputData.original_price);
+        formData.append("selling_price", inputData.selling_price);
+        if (inputImage) {
+            formData.append("image", inputImage.image);
+        }
+        formData.append("quantity", inputData.quantity);
+        formData.append("brand", inputData.brand);
+
+        axiosClient
+            .patch(`/product/${params.id}`, formData)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    console.log(inputData);
     return (
         <div>
-            <>
-                {loading ? (
-                    <h1>loading.....</h1>
-                ) : (
-                    <Form
-                        onSubmit={handleSubmit}
-                        method="post"
-                        encType="multipart/form-data"
-                    >
+            {loading ? (
+                <h1>loading.....</h1>
+            ) : (
+                <>
+                    <Form onSubmit={handleSubmit} encType="multipart/form-data">
                         <Tabs
                             defaultActiveKey="Product"
                             id="uncontrolled-tab-example"
@@ -104,16 +102,7 @@ const EditProduct = () => {
                                 >
                                     <option>Open this select menu</option>
                                     {categoryList.map((cat) => (
-                                        <option
-                                            value={cat.id}
-                                            key={cat.id}
-                                            selected={
-                                                cat.id ===
-                                                singleProduct.category_id
-                                                    ? true
-                                                    : false
-                                            }
-                                        >
+                                        <option value={cat.id} key={cat.id}>
                                             {cat.title}
                                         </option>
                                     ))}
@@ -128,7 +117,7 @@ const EditProduct = () => {
                                         placeholder="Enter title"
                                         name="title"
                                         onChange={handleChange}
-                                        value={singleProduct.title}
+                                        value={inputData.title}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -140,8 +129,8 @@ const EditProduct = () => {
                                         type="text"
                                         placeholder="Enter slug"
                                         name="slug"
+                                        value={inputData.slug}
                                         onChange={handleChange}
-                                        value={singleProduct.slug}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -153,8 +142,8 @@ const EditProduct = () => {
                                         type="text"
                                         placeholder="Enter Brand"
                                         name="brand"
+                                        value={inputData.brand}
                                         onChange={handleChange}
-                                        value={singleProduct.brand}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -168,7 +157,7 @@ const EditProduct = () => {
                                         placeholder="Enter Description"
                                         name="description"
                                         onChange={handleChange}
-                                        value={singleProduct.description}
+                                        value={inputData.description}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -182,13 +171,6 @@ const EditProduct = () => {
                                         onChange={handleImage}
                                     />
                                 </Form.Group>
-                                <img
-                                    src={singleProduct.image}
-                                    width={"150px"}
-                                    height={"150px"}
-                                    className="my-4"
-                                    alt=""
-                                />
                             </Tab>
                             <Tab eventKey="SeoTags" title="Seo Tags">
                                 <Form.Group
@@ -200,8 +182,8 @@ const EditProduct = () => {
                                         type="text"
                                         placeholder="Meta Title"
                                         name="meta_title"
+                                        value={inputData.meta_title}
                                         onChange={handleChange}
-                                        value={singleProduct.meta_title}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -212,9 +194,9 @@ const EditProduct = () => {
                                     <Form.Control
                                         type="text"
                                         placeholder="Meta Keyword"
-                                        name="meta_keyword"
+                                        name="meta_keywords"
+                                        value={inputData.meta_keywords}
                                         onChange={handleChange}
-                                        value={singleProduct.meta_keywords}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -227,8 +209,8 @@ const EditProduct = () => {
                                         placeholder="Enter Meta Description"
                                         rows={3}
                                         name="meta_description"
+                                        value={inputData.meta_description}
                                         onChange={handleChange}
-                                        value={singleProduct.meta_description}
                                     />
                                 </Form.Group>
                             </Tab>
@@ -242,8 +224,8 @@ const EditProduct = () => {
                                         type="text"
                                         placeholder="Original Price"
                                         name="original_price"
+                                        value={inputData.original_price}
                                         onChange={handleChange}
-                                        value={singleProduct.original_price}
                                     />
                                 </Form.Group>
 
@@ -256,8 +238,8 @@ const EditProduct = () => {
                                         type="text"
                                         placeholder="Selling Price"
                                         name="selling_price"
+                                        value={inputData.selling_price}
                                         onChange={handleChange}
-                                        value={singleProduct.selling_price}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -267,9 +249,9 @@ const EditProduct = () => {
                                     <Form.Label>quantity</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        name="qty"
+                                        name="quantity"
+                                        value={inputData.quantity}
                                         onChange={handleChange}
-                                        value={singleProduct.quantity}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -279,11 +261,11 @@ const EditProduct = () => {
                                     <Form.Check
                                         type="checkbox"
                                         label="Feature"
-                                        name="feature"
-                                        onChange={handleChange}
-                                        checked={
-                                            singleProduct.feature ? true : ""
+                                        name="featured"
+                                        defaultChecked={
+                                            inputData.featured ? true : false
                                         }
+                                        onChange={handleCheck}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -294,10 +276,10 @@ const EditProduct = () => {
                                         type="checkbox"
                                         label="Popular"
                                         name="popular"
-                                        onChange={handleChange}
-                                        checked={
-                                            singleProduct.popular ? true : ""
+                                        defaultChecked={
+                                            inputData.popular ? true : false
                                         }
+                                        onChange={handleCheck}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -308,9 +290,9 @@ const EditProduct = () => {
                                         type="checkbox"
                                         label="Hide"
                                         name="status"
-                                        onChange={handleChange}
-                                        checked={
-                                            singleProduct.status ? true : ""
+                                        onChange={handleCheck}
+                                        defaultChecked={
+                                            inputData.status ? true : false
                                         }
                                     />
                                 </Form.Group>
@@ -321,8 +303,8 @@ const EditProduct = () => {
                             Submit
                         </Button>
                     </Form>
-                )}
-            </>
+                </>
+            )}
         </div>
     );
 };

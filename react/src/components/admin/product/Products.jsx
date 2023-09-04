@@ -63,12 +63,15 @@ const Products = () => {
                                 <td>{d.description}</td>
                                 <td>{d.original_price}</td>
                                 <td>{d.selling_price}</td>
-                                <img
-                                    src={d.image}
-                                    alt=""
-                                    width={"50px"}
-                                    height={"50px"}
-                                />
+                                <td>
+                                    <img
+                                        src={d.image}
+                                        alt=""
+                                        width={"50px"}
+                                        height={"50px"}
+                                    />
+                                </td>
+
                                 <td>{`${d.status ? "Hidden" : "Visible"}`}</td>
                                 <td>{`${d.popular ? "yes" : "no"}`}</td>
                                 <td className="d-flex ">

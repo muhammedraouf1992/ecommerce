@@ -30,6 +30,7 @@ const EditCategory = () => {
             [e.target.name]: e.target.value,
             status: e.target.checked,
         });
+        console.log(singleCategory);
     };
 
     const handleSubmit = (e) => {

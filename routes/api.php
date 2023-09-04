@@ -37,6 +37,6 @@ Route::get('/visible', [CategoryController::class, 'visible']);
 
 Route::get('/product', [ProductController::class, 'index']);
 Route::post('/product', [ProductController::class, 'store']);
-Route::put('/product/{product}', [ProductController::class, 'update']);
+Route::patch('/product/{product}', [ProductController::class, 'update']);
 Route::delete('/product/{product}', [ProductController::class, 'delete']);
 Route::get('/product/{id}', [ProductController::class, 'show']);

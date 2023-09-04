@@ -80,7 +80,7 @@ class ProductController extends Controller
                 'status' => $status,
                 'popular' => $popular,
                 'featured' => $featured,
-                'quantity' => $request->qty
+                'quantity' => $request->quantity
             ]);
             return response()->json([
                 'message' => 'product added successfully without image', 200
@@ -119,7 +119,7 @@ class ProductController extends Controller
                 'quantity' => $request->qty
             ]);
             return response()->json([
-                'message' => 'product added successfully with image', 200
+                'message' => 'product updatd successfully with image', 200
             ]);
         } else {
             $status = $request->status ? '1' : '0';
@@ -142,7 +142,7 @@ class ProductController extends Controller
                 'quantity' => $request->qty
             ]);
             return response()->json([
-                'message' => 'product added successfully without image', 200
+                'message' => 'product updatd successfully without image', 200
             ]);
         }
     }

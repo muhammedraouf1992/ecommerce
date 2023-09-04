@@ -20,6 +20,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
+
         $data = $request->validate([
             'title' => ['required', 'max:191'],
             'slug' => ['required', 'max:191'],
@@ -48,6 +49,7 @@ class CategoryController extends Controller
     }
     public function update(Request $request, Category $category)
     {
+
         $data = $request->validate([
             'title' => ['required', 'max:191'],
             'slug' => ['required', 'max:191'],

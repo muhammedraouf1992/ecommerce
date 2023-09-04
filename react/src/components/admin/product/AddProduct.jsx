@@ -23,7 +23,7 @@ const AddProduct = () => {
         original_price: "",
         selling_price: "",
         category_id: "",
-        qty: "",
+        quantity: "",
         brand: "",
     });
     useEffect(() => {
@@ -44,6 +44,7 @@ const AddProduct = () => {
             popular: e.target.checked,
             featured: e.target.checked,
         });
+        console.log(inputData);
     };
     const handleImage = (e) => {
         setInputImage({ image: e.target.files[0] });
@@ -64,8 +65,10 @@ const AddProduct = () => {
         formData.append("featured", inputData.featured);
         formData.append("original_price", inputData.original_price);
         formData.append("selling_price", inputData.selling_price);
-        formData.append("image", inputImage.image);
-        formData.append("qty", inputData.qty);
+        if (inputImage) {
+            formData.append("image", inputImage.image);
+        }
+        formData.append("quantity", inputData.quantity);
         formData.append("brand", inputData.brand);
 
         axiosClient
@@ -235,7 +238,7 @@ const AddProduct = () => {
                                 <Form.Label>quantity</Form.Label>
                                 <Form.Control
                                     type="number"
-                                    name="qty"
+                                    name="quantity"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
@@ -246,8 +249,8 @@ const AddProduct = () => {
                                 <Form.Check
                                     type="checkbox"
                                     label="Feature"
-                                    name="feature"
-                                    onChange={handleChange}
+                                    name="featured"
+                                    onChange={handleCheck}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -258,7 +261,7 @@ const AddProduct = () => {
                                     type="checkbox"
                                     label="Popular"
                                     name="popular"
-                                    onChange={handleChange}
+                                    onChange={handleCheck}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -269,7 +272,7 @@ const AddProduct = () => {
                                     type="checkbox"
                                     label="Hide"
                                     name="status"
-                                    onChange={handleChange}
+                                    onChange={handleCheck}
                                 />
                             </Form.Group>
                         </Tab>
