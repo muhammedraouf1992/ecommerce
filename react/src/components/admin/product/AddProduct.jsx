@@ -9,6 +9,11 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const [categoryList, setCategoryList] = useState([]);
     const [inputImage, setInputImage] = useState();
+    const [checked, setChecked] = useState({
+        status: "",
+        popular: "",
+        featured: "",
+    });
 
     const [inputData, setInputData] = useState({
         title: "",
@@ -17,9 +22,7 @@ const AddProduct = () => {
         meta_title: "",
         meta_description: "",
         meta_keyword: "",
-        status: "",
-        popular: "",
-        featured: "",
+
         original_price: "",
         selling_price: "",
         category_id: "",
@@ -37,18 +40,21 @@ const AddProduct = () => {
             });
     }, []);
     const handleChange = (e) => {
+        e.persist();
         setInputData({
             ...inputData,
             [e.target.name]: e.target.value,
-            status: e.target.checked,
-            popular: e.target.checked,
-            featured: e.target.checked,
         });
         console.log(inputData);
     };
     const handleImage = (e) => {
         setInputImage({ image: e.target.files[0] });
     };
+    const handleCheck = (e) => {
+        setChecked({ ...checked, [e.target.name]: e.target.checked });
+        console.log(checked);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -60,9 +66,9 @@ const AddProduct = () => {
         formData.append("meta_title", inputData.meta_title);
         formData.append("meta_description", inputData.meta_description);
         formData.append("meta_keyword", inputData.meta_keyword);
-        formData.append("status", inputData.status);
-        formData.append("popular", inputData.popular);
-        formData.append("featured", inputData.featured);
+        formData.append("status", checked.status);
+        formData.append("popular", checked.popular);
+        formData.append("featured", checked.featured);
         formData.append("original_price", inputData.original_price);
         formData.append("selling_price", inputData.selling_price);
         if (inputImage) {
@@ -100,6 +106,7 @@ const AddProduct = () => {
                                 aria-label="Default select example"
                                 onChange={handleChange}
                                 name="category_id"
+                                value={inputData.category_id}
                             >
                                 <option>Open this select menu</option>
                                 {categoryList.map((cat) => (
@@ -118,6 +125,7 @@ const AddProduct = () => {
                                     placeholder="Enter title"
                                     name="title"
                                     onChange={handleChange}
+                                    value={inputData.title}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -130,6 +138,7 @@ const AddProduct = () => {
                                     placeholder="Enter slug"
                                     name="slug"
                                     onChange={handleChange}
+                                    value={inputData.slug}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -142,6 +151,7 @@ const AddProduct = () => {
                                     placeholder="Enter Brand"
                                     name="brand"
                                     onChange={handleChange}
+                                    value={inputData.brand}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -155,6 +165,7 @@ const AddProduct = () => {
                                     placeholder="Enter Description"
                                     name="description"
                                     onChange={handleChange}
+                                    value={inputData.description}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formFile" className="mb-3">
@@ -177,6 +188,7 @@ const AddProduct = () => {
                                     placeholder="Meta Title"
                                     name="meta_title"
                                     onChange={handleChange}
+                                    value={inputData.handleChange}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -189,6 +201,7 @@ const AddProduct = () => {
                                     placeholder="Meta Keyword"
                                     name="meta_keyword"
                                     onChange={handleChange}
+                                    value={inputData.meta_keyword}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -202,6 +215,7 @@ const AddProduct = () => {
                                     rows={3}
                                     name="meta_description"
                                     onChange={handleChange}
+                                    value={inputData.meta_description}
                                 />
                             </Form.Group>
                         </Tab>
@@ -216,6 +230,7 @@ const AddProduct = () => {
                                     placeholder="Original Price"
                                     name="original_price"
                                     onChange={handleChange}
+                                    value={inputData.original_price}
                                 />
                             </Form.Group>
 
@@ -229,6 +244,7 @@ const AddProduct = () => {
                                     placeholder="Selling Price"
                                     name="selling_price"
                                     onChange={handleChange}
+                                    value={inputData.selling_price}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -238,8 +254,10 @@ const AddProduct = () => {
                                 <Form.Label>quantity</Form.Label>
                                 <Form.Control
                                     type="number"
+                                    placeholder="Quantity"
                                     name="quantity"
                                     onChange={handleChange}
+                                    value={inputData.quantity}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -251,6 +269,7 @@ const AddProduct = () => {
                                     label="Feature"
                                     name="featured"
                                     onChange={handleCheck}
+                                    value={inputData.featured}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -262,6 +281,7 @@ const AddProduct = () => {
                                     label="Popular"
                                     name="popular"
                                     onChange={handleCheck}
+                                    value={inputData.popular}
                                 />
                             </Form.Group>
                             <Form.Group
@@ -273,6 +293,7 @@ const AddProduct = () => {
                                     label="Hide"
                                     name="status"
                                     onChange={handleCheck}
+                                    value={inputData.status}
                                 />
                             </Form.Group>
                         </Tab>

@@ -4,30 +4,50 @@ import Tabs from "react-bootstrap/Tabs";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axiosClient from "../../../axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditProduct = () => {
     const [categoryList, setCategoryList] = useState([]);
     const [inputImage, setInputImage] = useState();
     const [loading, setLoading] = useState(false);
-    const [checked, setChecked] = useState([]);
-    const [inputData, setInputData] = useState({});
+    const [checked, setChecked] = useState({
+        status: "",
+        popular: "",
+        featured: "",
+    });
+    const [inputData, setInputData] = useState({
+        title: "",
+        slug: "",
+        description: "",
+        meta_title: "",
+        meta_description: "",
+        meta_keywords: "",
+        status: "",
+        popular: "",
+        featured: "",
+        original_price: "",
+        selling_price: "",
+        category_id: "",
+        quantity: "",
+        brand: "",
+    });
 
     const params = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
-        // axiosClient
-        //     .get("/visible")
-        //     .then(({ data }) => {
-        //         setCategoryList(data.data);
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
         setLoading(true);
+        axiosClient
+            .get("/visible")
+            .then(({ data }) => {
+                setCategoryList(data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
         axiosClient
             .get(`/product/${params.id}`)
             .then(({ data }) => {
-                console.log(data.data);
                 setInputData(data.data);
                 setLoading(false);
             })
@@ -54,16 +74,16 @@ const EditProduct = () => {
         e.preventDefault();
         const formData = new FormData();
 
-        formData.append("category_id", 11);
+        formData.append("category_id", inputData.category_id);
         formData.append("title", inputData.title);
         formData.append("slug", inputData.slug);
         formData.append("description", inputData.description);
         formData.append("meta_title", inputData.meta_title);
         formData.append("meta_description", inputData.meta_description);
         formData.append("meta_keywords", inputData.meta_keywords);
-        formData.append("status", checked.status ? "1" : "0");
-        formData.append("popular", checked.popular ? "1" : "0");
-        formData.append("featured", checked.featured ? "1" : "0");
+        formData.append("status", checked.status);
+        formData.append("popular", checked.popular);
+        formData.append("featured", checked.featured);
         formData.append("original_price", inputData.original_price);
         formData.append("selling_price", inputData.selling_price);
         if (inputImage) {
@@ -73,22 +93,27 @@ const EditProduct = () => {
         formData.append("brand", inputData.brand);
 
         axiosClient
-            .patch(`/product/${params.id}`, formData)
+            .post(`/product/${params.id}`, formData)
             .then((data) => {
                 console.log(data);
+                navigate("/admin/product");
             })
             .catch((error) => {
                 console.log(error);
             });
     };
-    console.log(inputData);
+
     return (
         <div>
             {loading ? (
                 <h1>loading.....</h1>
             ) : (
                 <>
-                    <Form onSubmit={handleSubmit} encType="multipart/form-data">
+                    <Form
+                        onSubmit={handleSubmit}
+                        encType="multipart/form-data"
+                        method="post"
+                    >
                         <Tabs
                             defaultActiveKey="Product"
                             id="uncontrolled-tab-example"
@@ -99,6 +124,7 @@ const EditProduct = () => {
                                     aria-label="Default select example"
                                     onChange={handleChange}
                                     name="category_id"
+                                    value={inputData.category_id}
                                 >
                                     <option>Open this select menu</option>
                                     {categoryList.map((cat) => (
@@ -171,6 +197,13 @@ const EditProduct = () => {
                                         onChange={handleImage}
                                     />
                                 </Form.Group>
+                                <img
+                                    src={inputData.image}
+                                    width={"100px"}
+                                    height={"100px"}
+                                    className="my-3"
+                                    alt=""
+                                />
                             </Tab>
                             <Tab eventKey="SeoTags" title="Seo Tags">
                                 <Form.Group
@@ -262,10 +295,11 @@ const EditProduct = () => {
                                         type="checkbox"
                                         label="Feature"
                                         name="featured"
+                                        onChange={handleCheck}
+                                        value={inputData.featured}
                                         defaultChecked={
                                             inputData.featured ? true : false
                                         }
-                                        onChange={handleCheck}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -276,10 +310,11 @@ const EditProduct = () => {
                                         type="checkbox"
                                         label="Popular"
                                         name="popular"
+                                        onChange={handleCheck}
+                                        value={inputData.popular}
                                         defaultChecked={
                                             inputData.popular ? true : false
                                         }
-                                        onChange={handleCheck}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -291,6 +326,7 @@ const EditProduct = () => {
                                         label="Hide"
                                         name="status"
                                         onChange={handleCheck}
+                                        value={inputData.status}
                                         defaultChecked={
                                             inputData.status ? true : false
                                         }

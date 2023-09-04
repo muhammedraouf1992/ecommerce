@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -31,17 +32,17 @@ class ProductController extends Controller
             'original_price' => ['required'],
             'brand' => ['required'],
             'category_id' => ['required'],
-            'qty' => ['required'],
+            'quantity' => ['required'],
         ]);
         if ($request->hasFile('image')) {
             $image = $request->image;
             $img_name = uniqid() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/products'), $img_name);
-            $last_name = 'http://127.0.0.1:8000/uploads/products/' . $img_name;
+            $last_name = 'uploads/products/' . $img_name;
 
-            $status = $request->status ? '1' : '0';
-            $popular = $request->popular ? '1' : '0';
-            $featured = $request->featured ? '1' : '0';
+            $status = $request->status == true ? '1' : '0';
+            $popular = $request->popular == true ? '1' : '0';
+            $featured = $request->featured == true ? '1' : '0';
             Product::create([
                 'title' => $request->title,
                 'slug' => $request->slug,
@@ -57,15 +58,15 @@ class ProductController extends Controller
                 'popular' => $popular,
                 'featured' => $featured,
                 'category_id' => $request->category_id,
-                'quantity' => $request->qty
+                'quantity' => $request->quantity
             ]);
             return response()->json([
                 'message' => 'product added successfully with image', 200
             ]);
         } else {
-            $status = $request->status ? '1' : '0';
-            $popular = $request->popular ? '1' : '0';
-            $featured = $request->featured ? '1' : '0';
+            $status = $request->status == true ? '1' : '0';
+            $popular = $request->popular == true ? '1' : '0';
+            $featured = $request->featured == true ? '1' : '0';
             Product::create([
                 'title' => $request->title,
                 'slug' => $request->slug,
@@ -94,20 +95,24 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->image;
             $img_name = uniqid() . '.' . $image->getClientOriginalExtension();
-            unlink($product->image);
-            $image->move(public_path('uploads/products'), $img_name);
-            $last_name = 'http://127.0.0.1:8000/uploads/products/' . $img_name;
 
-            $status = $request->status ? '1' : '0';
-            $popular = $request->popular ? '1' : '0';
-            $featured = $request->featured ? '1' : '0';
+            if (File::exists(public_path($product->image))) {
+                unlink($product->image);
+            }
+
+            $image->move(public_path('uploads/products'), $img_name);
+            $last_name = 'uploads/products/' . $img_name;
+
+            $status = $request->status == true ? '1' : '0';
+            $popular = $request->popular == true ? '1' : '0';
+            $featured = $request->featured == true ? '1' : '0';
             $product->update([
                 'title' => $request->title,
                 'slug' => $request->slug,
                 'description' => $request->description,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description,
-                'meta_keywords' => $request->meta_keyword,
+                'meta_keywords' => $request->meta_keywords,
                 'original_price' => $request->original_price,
                 'selling_price' => $request->selling_price,
                 'image' => $last_name,
@@ -116,22 +121,22 @@ class ProductController extends Controller
                 'popular' => $popular,
                 'featured' => $featured,
                 'category_id' => $request->category_id,
-                'quantity' => $request->qty
+                'quantity' => $request->quantity
             ]);
             return response()->json([
                 'message' => 'product updatd successfully with image', 200
             ]);
         } else {
-            $status = $request->status ? '1' : '0';
-            $popular = $request->popular ? '1' : '0';
-            $featured = $request->featured ? '1' : '0';
+            $status = $request->status == true ? '1' : '0';
+            $popular = $request->popular == true ? '1' : '0';
+            $featured = $request->featured == true ? '1' : '0';
             $product->update([
                 'title' => $request->title,
                 'slug' => $request->slug,
                 'description' => $request->description,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description,
-                'meta_keywords' => $request->meta_keyword,
+                'meta_keywords' => $request->meta_keywords,
                 'original_price' => $request->original_price,
                 'selling_price' => $request->selling_price,
                 'category_id' => $request->category_id,
@@ -139,7 +144,7 @@ class ProductController extends Controller
                 'status' => $status,
                 'popular' => $popular,
                 'featured' => $featured,
-                'quantity' => $request->qty
+                'quantity' => $request->quantity
             ]);
             return response()->json([
                 'message' => 'product updatd successfully without image', 200

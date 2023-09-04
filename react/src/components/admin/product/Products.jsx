@@ -65,7 +65,7 @@ const Products = () => {
                                 <td>{d.selling_price}</td>
                                 <td>
                                     <img
-                                        src={d.image}
+                                        src={"http://127.0.0.1:8000/" + d.image}
                                         alt=""
                                         width={"50px"}
                                         height={"50px"}
