@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2023 at 09:05 PM
+-- Generation Time: Sep 04, 2023 at 10:16 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -129,7 +129,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (4, 'App\\Models\\User', 2, 'main', 'e3b4fe09f113c7c6b5c40083a89ff6c18c6dbd2a78a5bbf364dd63d023bea800', '[\"*\"]', NULL, NULL, '2023-09-01 19:02:36', '2023-09-01 19:02:36'),
 (8, 'App\\Models\\User', 2, 'main', 'ea072d49d5eed708a5f5dec41a95619200c68ef1959c0b815f16607f9fa9d5cd', '[\"*\"]', NULL, NULL, '2023-09-01 19:12:59', '2023-09-01 19:12:59'),
 (10, 'App\\Models\\User', 3, 'main', 'ba3dd54e98838f6f9ce1ba2ba9411ab9ecfcbb1deb9324410206a0f0c012db76', '[\"*\"]', NULL, NULL, '2023-09-02 06:30:09', '2023-09-02 06:30:09'),
-(19, 'App\\Models\\User', 2, 'main', '4760e39a049b9dd7a0f3c3be70021e18097b437c4eef4cae67a1a38668a54305', '[\"*\"]', NULL, NULL, '2023-09-02 09:42:40', '2023-09-02 09:42:40');
+(20, 'App\\Models\\User', 2, 'main', '92cb81db2e0f7943bfbbcc58247bf64aa4a9cbbfb3cfa60bd2e2dcf136907093', '[\"*\"]', NULL, NULL, '2023-09-04 15:18:37', '2023-09-04 15:18:37');
 
 -- --------------------------------------------------------
 
@@ -165,7 +165,11 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `category_id`, `title`, `slug`, `description`, `meta_title`, `meta_keywords`, `meta_description`, `original_price`, `selling_price`, `brand`, `image`, `quantity`, `status`, `popular`, `featured`, `created_at`, `updated_at`) VALUES
 (1, 11, 'a', 'a', 'a', 'a', 'a', 'a', '123', '123', 'a', 'http://127.0.0.1:8000/uploads/products/64f38202d18ec.png', '13', 1, 1, 1, '2023-09-02 15:42:10', '2023-09-02 15:42:10'),
 (2, 10, 'a', 'a', 'a', 'a', 'a', 'a', '120', '100', 'a', 'http://127.0.0.1:8000/uploads/products/64f386377fd2a.jpg', '124', 1, 1, 1, '2023-09-02 16:00:07', '2023-09-02 16:00:07'),
-(3, 11, 'shirt', 'shirt', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, animi!', 'a', 'a', 'a', '160', '120', 'zara', 'http://127.0.0.1:8000/uploads/products/64f386690a7e9.jpg', '56', 1, 1, 1, '2023-09-02 16:00:57', '2023-09-02 16:00:57');
+(3, 11, 'shirt', 'shirt', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, animi!', 'a', 'a', 'a', '160', '120', 'zara', 'http://127.0.0.1:8000/uploads/products/64f386690a7e9.jpg', '56', 1, 1, 1, '2023-09-02 16:00:57', '2023-09-02 16:00:57'),
+(4, 10, 'h', 'h', 'h', 'h', 'h', 'h', '12', '12', 'h', 'http://127.0.0.1:8000/uploads/products/64f6271fa7d74.jpg', '12', 0, 0, 0, '2023-09-04 15:51:11', '2023-09-04 15:51:11'),
+(5, 7, 'c', 'c', 'c', 'c', 'c', 'c', '1222', '121212', 'c', 'http://127.0.0.1:8000/uploads/products/64f627bd8ef02.jpg', '12', 0, 0, 0, '2023-09-04 15:53:49', '2023-09-04 15:53:49'),
+(6, 7, 'w', 'w', 'www', 'w', 's', 'w', '12', '12', 'w', 'http://127.0.0.1:8000/uploads/products/64f63804a7e6f.jpg', '12', 0, 0, 0, '2023-09-04 16:02:16', '2023-09-04 17:03:16'),
+(7, 11, 'r', 'r', 'r', 'r', 'r', 'r', '41', '41', 'r', 'uploads/products/64f63a596a45d.jpg', '41', 0, 0, 0, '2023-09-04 16:02:51', '2023-09-04 17:13:13');
 
 -- --------------------------------------------------------
 
@@ -269,13 +273,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
