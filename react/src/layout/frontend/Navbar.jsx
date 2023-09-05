@@ -19,8 +19,8 @@ function NavScrollExample() {
         });
     };
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
-            <Container className="">
+        <Navbar expand="lg" className="bg-body-secondary">
+            <Container className="fluid">
                 <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll" className="">
@@ -28,6 +28,13 @@ function NavScrollExample() {
                         <Link className="mx-2" to="/">
                             Home
                         </Link>
+                        <Link className="mx-2" to="/aboutus">
+                            About Us
+                        </Link>
+                        <Link className="mx-2" to="/contactus">
+                            Contact Us
+                        </Link>
+
                         {user.role_as ? (
                             <Link className="mx-2" to="/admin">
                                 Admin

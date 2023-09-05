@@ -8,6 +8,16 @@ const Products = () => {
     const [fetchedProducts, setFetchedProducts] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const getAllData = () => {
+        axiosClient
+            .get("/product")
+            .then(({ data }) => {
+                setFetchedProducts(data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     useEffect(() => {
         setLoading(true);
         axiosClient

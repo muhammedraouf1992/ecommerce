@@ -11,10 +11,28 @@ import EditCategory from "./components/admin/category/EditCategory";
 import Products from "./components/admin/product/Products";
 import AddProduct from "./components/admin/product/AddProduct";
 import EditProduct from "./components/admin/product/EditProduct";
+import FrontendLayout from "./layout/frontend/FrontendLayout";
+import HomePage from "./layout/frontend/pages/HomePage";
+import AboutUsPage from "./layout/frontend/pages/AboutUsPage";
+import ContactUsPage from "./layout/frontend/pages/ContactUsPage";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: <FrontendLayout />,
+        children: [
+            {
+                path: "/",
+                element: <HomePage />,
+            },
+            {
+                path: "/aboutus",
+                element: <AboutUsPage />,
+            },
+            {
+                path: "/contactus",
+                element: <ContactUsPage />,
+            },
+        ],
     },
     {
         path: "/login",

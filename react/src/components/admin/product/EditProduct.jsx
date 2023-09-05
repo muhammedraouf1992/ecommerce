@@ -49,6 +49,7 @@ const EditProduct = () => {
             .get(`/product/${params.id}`)
             .then(({ data }) => {
                 setInputData(data.data);
+                setChecked(data.data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -65,6 +66,7 @@ const EditProduct = () => {
     };
     const handleCheck = (e) => {
         setChecked({ ...checked, [e.target.name]: e.target.checked });
+        console.log(checked);
     };
     const handleImage = (e) => {
         setInputImage({ image: e.target.files[0] });
@@ -81,9 +83,9 @@ const EditProduct = () => {
         formData.append("meta_title", inputData.meta_title);
         formData.append("meta_description", inputData.meta_description);
         formData.append("meta_keywords", inputData.meta_keywords);
-        formData.append("status", checked.status);
-        formData.append("popular", checked.popular);
-        formData.append("featured", checked.featured);
+        formData.append("status", checked.status ? "1" : "0");
+        formData.append("popular", checked.popular ? "1" : "0");
+        formData.append("featured", checked.featured ? "1" : "0");
         formData.append("original_price", inputData.original_price);
         formData.append("selling_price", inputData.selling_price);
         if (inputImage) {
@@ -97,6 +99,7 @@ const EditProduct = () => {
             .then((data) => {
                 console.log(data);
                 navigate("/admin/product");
+                console.log(checked);
             })
             .catch((error) => {
                 console.log(error);
@@ -198,7 +201,10 @@ const EditProduct = () => {
                                     />
                                 </Form.Group>
                                 <img
-                                    src={inputData.image}
+                                    src={
+                                        `http://127.0.0.1:8000/` +
+                                        inputData.image
+                                    }
                                     width={"100px"}
                                     height={"100px"}
                                     className="my-3"
@@ -296,9 +302,10 @@ const EditProduct = () => {
                                         label="Feature"
                                         name="featured"
                                         onChange={handleCheck}
-                                        value={inputData.featured}
                                         defaultChecked={
-                                            inputData.featured ? true : false
+                                            checked.featured === 1
+                                                ? true
+                                                : false
                                         }
                                     />
                                 </Form.Group>
@@ -311,9 +318,8 @@ const EditProduct = () => {
                                         label="Popular"
                                         name="popular"
                                         onChange={handleCheck}
-                                        value={inputData.popular}
                                         defaultChecked={
-                                            inputData.popular ? true : false
+                                            checked.popular === 1 ? true : false
                                         }
                                     />
                                 </Form.Group>
@@ -326,9 +332,8 @@ const EditProduct = () => {
                                         label="Hide"
                                         name="status"
                                         onChange={handleCheck}
-                                        value={inputData.status}
                                         defaultChecked={
-                                            inputData.status ? true : false
+                                            checked.status === 1 ? true : false
                                         }
                                     />
                                 </Form.Group>

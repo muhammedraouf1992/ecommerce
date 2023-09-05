@@ -40,9 +40,9 @@ class ProductController extends Controller
             $image->move(public_path('uploads/products'), $img_name);
             $last_name = 'uploads/products/' . $img_name;
 
-            $status = $request->status == true ? '1' : '0';
-            $popular = $request->popular == true ? '1' : '0';
-            $featured = $request->featured == true ? '1' : '0';
+            $status = $request->status;
+            $popular = $request->popular;
+            $featured = $request->featured;
             Product::create([
                 'title' => $request->title,
                 'slug' => $request->slug,
@@ -64,9 +64,9 @@ class ProductController extends Controller
                 'message' => 'product added successfully with image', 200
             ]);
         } else {
-            $status = $request->status == true ? '1' : '0';
-            $popular = $request->popular == true ? '1' : '0';
-            $featured = $request->featured == true ? '1' : '0';
+            $status = $request->status;
+            $popular = $request->popular;
+            $featured = $request->featured;
             Product::create([
                 'title' => $request->title,
                 'slug' => $request->slug,
@@ -150,5 +150,12 @@ class ProductController extends Controller
                 'message' => 'product updatd successfully without image', 200
             ]);
         }
+    }
+    public function delete(Product $product)
+    {
+        $product->delete();
+        return response()->json([
+            'message' => 'product deleted successfully'
+        ]);
     }
 }
