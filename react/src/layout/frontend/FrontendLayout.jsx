@@ -11,9 +11,7 @@ const FrontendLayout = () => {
             <NavScrollExample />
 
             <Container>
-                <Row>
-                    <Col>{<Outlet />}</Col>
-                </Row>
+                <Row>{<Outlet />}</Row>
             </Container>
         </>
     );

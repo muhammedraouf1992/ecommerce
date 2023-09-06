@@ -34,6 +34,9 @@ function NavScrollExample() {
                         <Link className="mx-2" to="/contactus">
                             Contact Us
                         </Link>
+                        <Link className="mx-2" to="/shop">
+                            Collection
+                        </Link>
 
                         {user.role_as ? (
                             <Link className="mx-2" to="/admin">

@@ -15,6 +15,9 @@ import FrontendLayout from "./layout/frontend/FrontendLayout";
 import HomePage from "./layout/frontend/pages/HomePage";
 import AboutUsPage from "./layout/frontend/pages/AboutUsPage";
 import ContactUsPage from "./layout/frontend/pages/ContactUsPage";
+import Collection from "./layout/frontend/pages/Collection";
+import ViewProduct from "./layout/frontend/pages/ViewProduct";
+import SingleProduct from "./layout/frontend/pages/SingleProduct";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -31,6 +34,18 @@ const router = createBrowserRouter([
             {
                 path: "/contactus",
                 element: <ContactUsPage />,
+            },
+            {
+                path: "/shop",
+                element: <Collection />,
+            },
+            {
+                path: "/product/:id",
+                element: <ViewProduct />,
+            },
+            {
+                path: "/single-product/:id",
+                element: <SingleProduct />,
             },
         ],
     },
