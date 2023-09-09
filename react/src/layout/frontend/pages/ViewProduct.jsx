@@ -32,29 +32,29 @@ const ViewProduct = () => {
         <>
             {fetchData.map((f) => (
                 <Col lg={4} md={6} sm={12} key={f.id}>
-                    <Link to={`/single-product/${f.id}`}>
-                        <Card>
-                            <Card.Img
-                                variant="top"
-                                src={`http://127.0.0.1:8000/${f.image}`}
-                            />
-                            <Card.Body>
-                                <Card.Title>{f.title}</Card.Title>
-                                <Card.Text>{f.description}</Card.Text>
-                                <Card.Text>
-                                    original price:
-                                    <span className="text-danger">
-                                        {f.original_price}
-                                    </span>
-                                </Card.Text>
-                                <Card.Text>
-                                    selling price :{f.selling_price}
-                                </Card.Text>
-
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Link>
+                    <Card>
+                        {f.quantity == 0 && <p>out of stock</p>}
+                        <Card.Img
+                            variant="top"
+                            src={`http://127.0.0.1:8000/${f.image}`}
+                        />
+                        <Card.Body>
+                            <Card.Title>{f.title}</Card.Title>
+                            <Card.Text>{f.description}</Card.Text>
+                            <Card.Text>
+                                original price:
+                                <span className="text-danger">
+                                    {f.original_price}
+                                </span>
+                            </Card.Text>
+                            <Card.Text>
+                                selling price :{f.selling_price}
+                            </Card.Text>
+                            <Link to={`/single-product/${f.id}`}>
+                                <Button variant="primary">view product</Button>
+                            </Link>
+                        </Card.Body>
+                    </Card>
                 </Col>
             ))}
         </>

@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axiosClient from "../../../axios";
 import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/esm/Button";
+
 const SingleProduct = () => {
     const params = useParams();
-
+    const [productCount, setProductCount] = useState(1);
     const [fetchData, setFetchData] = useState({});
+    const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
@@ -24,9 +30,47 @@ const SingleProduct = () => {
     if (loading) {
         return <h1>loading.......</h1>;
     }
+    const handleMinus = () => {
+        if (productCount > 1) {
+            setProductCount((prev) => prev - 1);
+        }
+    };
+    const handlePlus = () => {
+        if (productCount < 10) {
+            setProductCount((prev) => prev + 1);
+        }
+    };
+    const addToCart = (e) => {
+        e.preventDefault;
+        const data = {
+            product_id: fetchData.id,
+            product_quantity: productCount,
+        };
+        axiosClient
+            .post("/add-to-cart", data)
+            .then((data) => {
+                console.log(data);
 
+                if (data.status === 200) {
+                    setMessage("product added successfully");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error.response.status === 401) {
+                    setMessage("you have to login to add to cart");
+                }
+                if (error.response.status === 409) {
+                    setMessage("product already exists");
+                }
+                if (error.response.status === 404) {
+                    setMessage("product doesnt exists");
+                }
+            });
+    };
     return (
         <>
+            {message && <h1>{message}</h1>}
             <Col lg={5} md={6} sm={12}>
                 <img
                     src={`http://127.0.0.1:8000/${fetchData.image}`}
@@ -47,14 +91,33 @@ const SingleProduct = () => {
                     <span className="fs-4">{fetchData.selling_price}$</span>
                 </div>
                 <div>
-                    <span className="py-2 px-4 bg-success text-white mt-2 d-inline-block text-uppercase">
-                        in stock
-                    </span>
+                    {fetchData.quantity > 0 ? (
+                        <span className="py-2 px-4 bg-success text-white mt-2 d-inline-block text-uppercase">
+                            in stock
+                        </span>
+                    ) : (
+                        <span className="py-2 px-4 bg-danger text-white mt-2 d-inline-block text-uppercase">
+                            out of stock
+                        </span>
+                    )}
                 </div>
+                <Row>
+                    <Col md={3}>
+                        <InputGroup className="mb-3 mt-3">
+                            <Button onClick={handleMinus}>-</Button>
+                            <div className="px-3 py-1 text-center">
+                                {productCount}
+                            </div>
+                            <Button onClick={handlePlus}>+</Button>
+                        </InputGroup>
+                    </Col>
+                    <Col md={3} className="mt-3">
+                        <Button onClick={addToCart}>Add to Cart</Button>
+                    </Col>
+                </Row>
+
                 <div>
-                    <button className="btn btn-danger mt-5">
-                        Add to wishlist
-                    </button>
+                    <button className="btn btn-danger">Add to wishlist</button>
                 </div>
             </Col>
         </>

@@ -18,6 +18,8 @@ import ContactUsPage from "./layout/frontend/pages/ContactUsPage";
 import Collection from "./layout/frontend/pages/Collection";
 import ViewProduct from "./layout/frontend/pages/ViewProduct";
 import SingleProduct from "./layout/frontend/pages/SingleProduct";
+import Cart from "./layout/frontend/pages/Cart";
+import Checkout from "./layout/frontend/pages/Checkout";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
             {
                 path: "/single-product/:id",
                 element: <SingleProduct />,
+            },
+            {
+                path: "/cart",
+                element: <Cart />,
+            },
+            {
+                path: "/checkout",
+                element: <Checkout />,
             },
         ],
     },

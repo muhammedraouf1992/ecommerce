@@ -57,6 +57,7 @@ const Products = () => {
                             <th>description</th>
                             <th>original price</th>
                             <th>selling price</th>
+                            <th>quantity</th>
                             <th>image</th>
                             <th>status</th>
                             <th>popular</th>
@@ -73,6 +74,7 @@ const Products = () => {
                                 <td>{d.description}</td>
                                 <td>{d.original_price}</td>
                                 <td>{d.selling_price}</td>
+                                <td>{d.quantity}</td>
                                 <td>
                                     <img
                                         src={"http://127.0.0.1:8000/" + d.image}
