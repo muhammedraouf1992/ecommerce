@@ -101,23 +101,27 @@ const SingleProduct = () => {
                         </span>
                     )}
                 </div>
-                <Row>
-                    <Col md={3}>
-                        <InputGroup className="mb-3 mt-3">
-                            <Button onClick={handleMinus}>-</Button>
-                            <div className="px-3 py-1 text-center">
-                                {productCount}
-                            </div>
-                            <Button onClick={handlePlus}>+</Button>
-                        </InputGroup>
-                    </Col>
-                    <Col md={3} className="mt-3">
-                        <Button onClick={addToCart}>Add to Cart</Button>
-                    </Col>
-                </Row>
+                {fetchData.quantity > 0 && (
+                    <Row>
+                        <Col md={3}>
+                            <InputGroup className="mb-3 mt-3">
+                                <Button onClick={handleMinus}>-</Button>
+                                <div className="px-3 py-1 text-center">
+                                    {productCount}
+                                </div>
+                                <Button onClick={handlePlus}>+</Button>
+                            </InputGroup>
+                        </Col>
 
+                        <Col md={3} className="mt-3">
+                            <Button onClick={addToCart}>Add to Cart</Button>
+                        </Col>
+                    </Row>
+                )}
                 <div>
-                    <button className="btn btn-danger">Add to wishlist</button>
+                    <button className="btn btn-danger mt-3">
+                        Add to wishlist
+                    </button>
                 </div>
             </Col>
         </>

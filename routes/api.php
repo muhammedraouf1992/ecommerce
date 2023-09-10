@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/cart-delete/{cart}', [CartController::class, 'delete']);
 
     Route::post('/make-order', [OrderController::class, 'index']);
+    Route::post('/validate-order', [OrderController::class, 'orderValidate']);
 });
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

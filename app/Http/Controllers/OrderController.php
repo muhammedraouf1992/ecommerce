@@ -32,7 +32,7 @@ class OrderController extends Controller
             'state' => $request->state,
             'city' => $request->city,
             'zip_code' => $request->zip_code,
-            'payment_method' => 'COD',
+            'payment_method' => $request->payment_method,
             'tracking_number' => 'ecom' . uniqid(),
         ]);
         $cartItems = Cart::where('user_id', $user_id)->get();
@@ -52,5 +52,19 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'order placed successfully'
         ], 200);
+    }
+    public function orderValidate(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'zip_code' => 'required',
+        ]);
+        return response()->json(['message' => 'data validated successfully'], 200);
     }
 }

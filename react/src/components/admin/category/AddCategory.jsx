@@ -23,14 +23,13 @@ const AddCategory = () => {
             status: e.target.checked,
         });
     };
-    console.log(inputData);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = { ...inputData };
         axiosClient
             .post("/category", data)
             .then((data) => {
-                console.log(data);
                 navigate("/admin/category");
             })
             .catch((error) => {

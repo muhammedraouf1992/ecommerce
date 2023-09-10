@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 const Checkout = () => {
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
+    const [errors, setErrors] = useState([]);
     const [loading, setLoading] = useState(false);
     const [inputData, setInputData] = useState({
         first_name: "",
@@ -27,12 +28,11 @@ const Checkout = () => {
         axiosClient
             .get("/cart")
             .then(({ data }) => {
-                console.log(data.data);
                 setCartData(data.data);
                 setLoading(false);
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.response.data);
 
                 setLoading(false);
             });
@@ -47,8 +47,9 @@ const Checkout = () => {
     const handleChange = (en) => {
         setInputData({ ...inputData, [en.target.name]: en.target.value });
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = (e, payment_method) => {
         e.preventDefault();
+
         const data = {
             first_name: inputData.first_name,
             last_name: inputData.last_name,
@@ -58,16 +59,36 @@ const Checkout = () => {
             zip_code: inputData.zip_code,
             city: inputData.city,
             state: inputData.state,
+            payment_method: payment_method,
         };
-        axiosClient
-            .post("/make-order", data)
-            .then((data) => {
-                console.log(data);
-                navigate("/");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
+        switch (payment_method) {
+            case "cod":
+                axiosClient
+                    .post("/make-order", data)
+                    .then((data) => {
+                        console.log(data);
+                        navigate("/");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        setErrors(error.response.data);
+                    });
+                break;
+            case "razorpay":
+                axiosClient
+                    .post("/validate-order", data)
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((error) => {
+                        console.log(error.response.data.errors);
+                        setErrors(error.response.data.errors);
+                    });
+                break;
+            default:
+                break;
+        }
     };
     if (loading) {
         return <h1 className="bg-danger">loading......</h1>;
@@ -83,7 +104,7 @@ const Checkout = () => {
                         <Card>
                             <Card.Header>Basic Information</Card.Header>
                             <Card.Body>
-                                <Form onSubmit={handleSubmit}>
+                                <Form>
                                     <Row className="mb-3">
                                         <Form.Group
                                             as={Col}
@@ -98,6 +119,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.first_name}
                                             />
+                                            <span className="text-danger">
+                                                {errors.first_name
+                                                    ? errors.first_name[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                         <Form.Group
                                             as={Col}
@@ -112,6 +138,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.last_name}
                                             />
+                                            <span className="text-danger">
+                                                {errors.last_name
+                                                    ? errors.last_name[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                     </Row>
                                     <Row>
@@ -128,6 +159,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.email}
                                             />
+                                            <span className="text-danger">
+                                                {errors.email
+                                                    ? errors.email[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                         <Form.Group
                                             as={Col}
@@ -144,6 +180,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.phone}
                                             />
+                                            <span className="text-danger">
+                                                {errors.phone
+                                                    ? errors.phone[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                     </Row>
                                     <Row>
@@ -159,6 +200,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.address}
                                             />
+                                            <span className="text-danger">
+                                                {errors.address
+                                                    ? errors.address[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                     </Row>
                                     <Row className="mb-3">
@@ -175,6 +221,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.city}
                                             />
+                                            <span className="text-danger">
+                                                {errors.city
+                                                    ? errors.city[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                         <Form.Group
                                             as={Col}
@@ -189,6 +240,11 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.state}
                                             />
+                                            <span className="text-danger">
+                                                {errors.state
+                                                    ? errors.state[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                         <Form.Group
                                             as={Col}
@@ -203,10 +259,28 @@ const Checkout = () => {
                                                 onChange={handleChange}
                                                 value={inputData.zip_code}
                                             />
+                                            <span className="text-danger">
+                                                {errors.zip_code
+                                                    ? errors.zip_code[0]
+                                                    : null}
+                                            </span>
                                         </Form.Group>
                                     </Row>
 
-                                    <Button type="submit">Submit form</Button>
+                                    <Button
+                                        type="submit"
+                                        onClick={(e) => handleSubmit(e, "cod")}
+                                    >
+                                        Submit form
+                                    </Button>
+                                    <Button
+                                        type="submit"
+                                        onClick={(e) =>
+                                            handleSubmit(e, "razorpay")
+                                        }
+                                    >
+                                        Pay Online
+                                    </Button>
                                 </Form>
                             </Card.Body>
                         </Card>
