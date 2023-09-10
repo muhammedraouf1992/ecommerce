@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+
 import Row from "react-bootstrap/Row";
 import axiosClient from "../../../axios";
 import { useNavigate } from "react-router-dom";
+
 const Checkout = () => {
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
@@ -23,6 +25,7 @@ const Checkout = () => {
         city: "",
         state: "",
     });
+
     useEffect(() => {
         setLoading(true);
         axiosClient
@@ -75,7 +78,7 @@ const Checkout = () => {
                         setErrors(error.response.data);
                     });
                 break;
-            case "razorpay":
+            case "payonline":
                 axiosClient
                     .post("/validate-order", data)
                     .then((data) => {
@@ -276,7 +279,7 @@ const Checkout = () => {
                                     <Button
                                         type="submit"
                                         onClick={(e) =>
-                                            handleSubmit(e, "razorpay")
+                                            handleSubmit(e, "payonline")
                                         }
                                     >
                                         Pay Online
