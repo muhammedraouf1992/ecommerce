@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
+
 import Col from "react-bootstrap/esm/Col";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
-import ReactDOM from "react-dom";
+
 import Row from "react-bootstrap/Row";
 import axiosClient from "../../../axios";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
-import Paypal from "./Paypal";
+
 const Checkout = () => {
     const [show, setShow] = useState(false);
 
@@ -94,7 +94,7 @@ const Checkout = () => {
                         setErrors(error.response.data);
                     });
                 break;
-            case "paypal":
+            case "payonline":
                 axiosClient
                     .post("/validate-order", data)
                     .then((data) => {
@@ -317,7 +317,7 @@ const Checkout = () => {
                                     <Button
                                         type="submit"
                                         onClick={(e) =>
-                                            handleSubmit(e, "paypal")
+                                            handleSubmit(e, "payonline")
                                         }
                                     >
                                         Pay Online
