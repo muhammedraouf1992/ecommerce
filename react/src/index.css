@@ -7,7 +7,8 @@
 }
 .banner {
     background-image: url("./assets/frontend/img/hero4.png");
-    height: 90vh;
+    height: 100vh;
+    background-position: center;
 }
 .heading {
     font-size: 64px !important;

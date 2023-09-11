@@ -5,8 +5,11 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import axiosClient from "../../../axios";
+
+import { useAuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 const AddCategory = () => {
+    const { postFetcher, postErrors } = useAuthContext();
     const navigate = useNavigate();
     const [inputData, setInputData] = useState({
         title: "",
@@ -27,15 +30,11 @@ const AddCategory = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = { ...inputData };
-        axiosClient
-            .post("/category", data)
-            .then((data) => {
-                navigate("/admin/category");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
+        postFetcher("/category", data, "/admin/category");
+        navigate("/admin/category");
     };
+
     return (
         <>
             <Form

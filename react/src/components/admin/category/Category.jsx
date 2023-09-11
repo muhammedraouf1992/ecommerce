@@ -3,40 +3,20 @@ import Table from "react-bootstrap/Table";
 import axiosClient from "../../../axios";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
+import { useAuthContext } from "../../../context/AuthContext";
 const Category = () => {
-    const [fetchedData, setfetchedData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const { getFetcher, fetchedData, errors, loading } = useAuthContext();
 
-    const getAllData = () => {
-        axiosClient
-            .get("/category")
-            .then(({ data }) => {
-                setfetchedData(data.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
     useEffect(() => {
-        setLoading(true);
-        axiosClient
-            .get("/category")
-            .then(({ data }) => {
-                setfetchedData(data.data);
-
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
+        getFetcher("/category");
     }, []);
+
     const onDelete = (id) => {
         alert("are you sure you want to delete this?");
         axiosClient
             .delete(`/category/${id}`)
             .then(() => {
-                getAllData();
+                getFetcher("/category");
             })
             .catch((error) => {
                 console.log(error);
