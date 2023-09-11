@@ -23,6 +23,7 @@ const Category = () => {
             .get("/category")
             .then(({ data }) => {
                 setfetchedData(data.data);
+
                 setLoading(false);
             })
             .catch((error) => {

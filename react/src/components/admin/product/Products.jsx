@@ -25,6 +25,7 @@ const Products = () => {
             .then(({ data }) => {
                 setFetchedProducts(data.data);
                 setLoading(false);
+                console.log(data.data);
             })
             .catch((error) => {
                 console.log(error);

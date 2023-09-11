@@ -98,70 +98,16 @@ const Sidebar = () => {
                     </div>
                 </div>
             </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/admin/orders">
+                    <i className="fas fa-fw fa-table"></i>
+                    <span>Orders</span>
+                </Link>
+            </li>
 
             <hr className="sidebar-divider" />
 
-            <div className="sidebar-heading">Addons</div>
-
-            <li className="nav-item">
-                <Link
-                    className="nav-link collapsed"
-                    to="#"
-                    data-toggle="collapse"
-                    data-target="#collapsePages"
-                    aria-expanded="true"
-                    aria-controls="collapsePages"
-                >
-                    <i className="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </Link>
-                <div
-                    id="collapsePages"
-                    className="collapse"
-                    aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar"
-                >
-                    <div className="bg-white py-2 collapse-inner rounded">
-                        <h6 className="collapse-header">Login Screens:</h6>
-                        <Link className="collapse-item" to="">
-                            Login
-                        </Link>
-                        <Link className="collapse-item" to="register.html">
-                            Register
-                        </Link>
-                        <Link
-                            className="collapse-item"
-                            to="forgot-password.html"
-                        >
-                            Forgot Password
-                        </Link>
-                        <div className="collapse-divider"></div>
-                        <h6 className="collapse-header">Other Pages:</h6>
-                        <Link className="collapse-item" to="404.html">
-                            404 Page
-                        </Link>
-                        <Link className="collapse-item" to="blank.html">
-                            Blank Page
-                        </Link>
-                    </div>
-                </div>
-            </li>
-
-            <li className="nav-item">
-                <Link className="nav-link" to="tables.html">
-                    <i className="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
-                </Link>
-            </li>
-
             <hr className="sidebar-divider d-none d-md-block" />
-
-            <div className="text-center d-none d-md-inline">
-                <button
-                    className="rounded-circle border-0"
-                    id="sidebarToggle"
-                ></button>
-            </div>
 
             <div className="sidebar-card d-none d-lg-flex">
                 <img

@@ -10,9 +10,7 @@ const FrontendLayout = () => {
         <>
             <NavScrollExample />
 
-            <Container>
-                <Row>{<Outlet />}</Row>
-            </Container>
+            <>{<Outlet />}</>
         </>
     );
 };

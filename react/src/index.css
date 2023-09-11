@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;500;600;700;800&display=swap");
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "League Spartan", sans-serif;
+}
+.banner {
+    background-image: url("./assets/frontend/img/hero4.png");
+    height: 90vh;
+}
+.heading {
+    font-size: 64px !important;
+    font-weight: bold;
+    color: black;
+}
+.heading span {
+    color: #088178;
+}
+.primary_btn {
+    font-size: 1.6rem;
+    background-image: url(img/button.png);
+    color: #088178;
+    padding: 0.8rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #088178;
+    background: transparent;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+.primary_btn:hover {
+    background: #088178;
+    color: white;
+}
+.feature-card {
+    border: 2px solid rgb(216, 216, 216) !important;
+    box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: all 0.3s;
+}
+.card p {
+    color: #088178;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    background-color: rgb(224, 185, 201);
+    text-transform: capitalize;
+    margin-top: 10px;
+}
+.feature-card:hover {
+    box-shadow: 0.3rem 0.3rem 3rem rgba(0, 0, 0, 0.2);
+}
+.feature-card img {
+    width: 100%;
+}
+.card2 p {
+    background-color: #cdebbc;
+}
+.card3 p {
+    background-color: #d1e8f2;
+}
+.card4 p {
+    background-color: #cdd4f8;
+}
+.card5 p {
+    background-color: #f6dbf6;
+}
+.card6 p {
+    background-color: #fff2e5;
+}

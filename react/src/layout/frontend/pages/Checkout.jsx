@@ -4,11 +4,18 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+import ReactDOM from "react-dom";
 import Row from "react-bootstrap/Row";
 import axiosClient from "../../../axios";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import Paypal from "./Paypal";
 const Checkout = () => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
     const [errors, setErrors] = useState([]);
@@ -23,6 +30,7 @@ const Checkout = () => {
         city: "",
         state: "",
     });
+
     useEffect(() => {
         setLoading(true);
         axiosClient
@@ -43,7 +51,18 @@ const Checkout = () => {
             currentValue.product.selling_price * currentValue.product_quantity,
         0
     );
-
+    const order_data = {
+        first_name: inputData.first_name,
+        last_name: inputData.last_name,
+        email: inputData.email,
+        phone: inputData.phone,
+        address: inputData.address,
+        zip_code: inputData.zip_code,
+        city: inputData.city,
+        state: inputData.state,
+        payment_method: "paid by paypal",
+        payment_id: "",
+    };
     const handleChange = (en) => {
         setInputData({ ...inputData, [en.target.name]: en.target.value });
     };
@@ -75,11 +94,13 @@ const Checkout = () => {
                         setErrors(error.response.data);
                     });
                 break;
-            case "razorpay":
+            case "paypal":
                 axiosClient
                     .post("/validate-order", data)
                     .then((data) => {
                         console.log(data);
+                        setErrors([]);
+                        handleShow();
                     })
                     .catch((error) => {
                         console.log(error.response.data.errors);
@@ -96,6 +117,26 @@ const Checkout = () => {
 
     return (
         <>
+            <>
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Paypal</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Paypal price={totalPrice} order_data={order_data} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
             {cartData.length == 0 ? (
                 <h1>your cart is empty</h1>
             ) : (
@@ -276,11 +317,12 @@ const Checkout = () => {
                                     <Button
                                         type="submit"
                                         onClick={(e) =>
-                                            handleSubmit(e, "razorpay")
+                                            handleSubmit(e, "paypal")
                                         }
                                     >
                                         Pay Online
                                     </Button>
+                                    {/* <Paypal /> */}
                                 </Form>
                             </Card.Body>
                         </Card>

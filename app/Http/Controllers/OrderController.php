@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +34,7 @@ class OrderController extends Controller
             'city' => $request->city,
             'zip_code' => $request->zip_code,
             'payment_method' => $request->payment_method,
+            'payment_id' => $request->payment_id,
             'tracking_number' => 'ecom' . uniqid(),
         ]);
         $cartItems = Cart::where('user_id', $user_id)->get();
@@ -66,5 +68,23 @@ class OrderController extends Controller
             'zip_code' => 'required',
         ]);
         return response()->json(['message' => 'data validated successfully'], 200);
+    }
+
+
+    public function getOrders()
+    {
+        $data = Order::all();
+        return response()->json([
+            'message' => 'success',
+            'data' => $data
+        ], 200);
+    }
+    public function getOrderItems($id)
+    {
+        $orderItem = OrderItem::where('order_id', '=', $id)->get();
+        return response()->json([
+            'message' => 'success',
+            'data' => $orderItem
+        ], 200);
     }
 }

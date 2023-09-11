@@ -20,6 +20,9 @@ import ViewProduct from "./layout/frontend/pages/ViewProduct";
 import SingleProduct from "./layout/frontend/pages/SingleProduct";
 import Cart from "./layout/frontend/pages/Cart";
 import Checkout from "./layout/frontend/pages/Checkout";
+import Paypal from "./layout/frontend/pages/Paypal";
+import Orders from "./components/admin/orders/orders";
+import OrderItem from "./components/admin/orders/OrderItem";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -106,6 +109,14 @@ const router = createBrowserRouter([
             {
                 path: "/admin/product/edit/:id",
                 element: <EditProduct />,
+            },
+            {
+                path: "/admin/order/edit/:id",
+                element: <OrderItem />,
+            },
+            {
+                path: "/admin/orders",
+                element: <Orders />,
             },
         ],
     },
