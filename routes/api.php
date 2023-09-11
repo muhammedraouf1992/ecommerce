@@ -38,7 +38,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/category', [CategoryController::class, 'index']);
 Route::post('/category', [CategoryController::class, 'store']);
-Route::put('/category/{category}', [CategoryController::class, 'update']);
+Route::post('/category/{category}', [CategoryController::class, 'update']);
 Route::delete('/category/{category}', [CategoryController::class, 'delete']);
 Route::get('/category/{id}', [CategoryController::class, 'show']);
 Route::get('/visible', [CategoryController::class, 'visible']);

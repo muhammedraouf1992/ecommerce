@@ -15,7 +15,7 @@ const PopularProducts = () => {
         return product.popular === 1;
     });
     return (
-        <Container className="space" fluid="xxl">
+        <Container className="space" fluid="xl">
             <Row className="text-center mt-5">
                 <h3 className="heading">Featured Products</h3>
                 <p className="fs-5">Summer Collection New Modern Design</p>

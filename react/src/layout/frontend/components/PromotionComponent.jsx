@@ -6,7 +6,7 @@ import Row from "react-bootstrap/esm/Row";
 
 const PromotionComponent = () => {
     return (
-        <Container className="space" fluid="xxl">
+        <Container className="space" fluid="xl">
             <Row>
                 <Col lg={6}>
                     <div className="col-background_1 d-flex justify-content-start align-items-center px-4">

@@ -27,7 +27,7 @@ const Collection = () => {
     }
 
     return (
-        <Container>
+        <Container fluid="xl my-5">
             <Row>
                 {fetchData.length < 1 ? (
                     <h1 className="text-danger text-uppercase">
@@ -38,7 +38,15 @@ const Collection = () => {
                         <Col lg={4} md={6} sm={12} key={f.id}>
                             <Card>
                                 <Card.Body>
-                                    <Card.Title className="text-capitalize">
+                                    <Card.Img
+                                        variant="top"
+                                        src={`http://127.0.0.1:8000/${f.image}`}
+                                        style={{
+                                            width: "150px",
+                                            height: "150px",
+                                        }}
+                                    />
+                                    <Card.Title className="text-capitalize mt-3">
                                         {f.title}
                                     </Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">

@@ -22,7 +22,7 @@ const FeaturedProducts = () => {
     }
 
     return (
-        <Container className="space" fluid="xxl">
+        <Container className="space" fluid="xl">
             <Row className="text-center mt-5">
                 <h3 className="heading">Popular Products</h3>
                 <p className="fs-5">Summer Collection New Modern Design</p>

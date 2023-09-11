@@ -8,8 +8,18 @@ import Form from "react-bootstrap/Form";
 const EditCategory = () => {
     const params = useParams();
     const navigate = useNavigate();
-    const [singleCategory, setSingeCategory] = useState({});
+    const [singleCategory, setSingeCategory] = useState({
+        title: "",
+        slug: "",
+        description: "",
+        metaTitle: "",
+        metaDescription: "",
+        metaKeyword: "",
+        status: "",
+    });
     const [loading, setLoading] = useState(false);
+    const [inputImage, setInputImage] = useState();
+    const [checked, setChecked] = useState({ status: "" });
 
     useEffect(() => {
         setLoading(true);
@@ -28,16 +38,32 @@ const EditCategory = () => {
         setSingeCategory({
             ...singleCategory,
             [e.target.name]: e.target.value,
-            status: e.target.checked,
         });
         console.log(singleCategory);
     };
-
+    const handleCheck = (e) => {
+        setChecked({ status: e.target.checked });
+    };
+    const handleImage = (e) => {
+        setInputImage({ image: e.target.files[0] });
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = { ...singleCategory };
+        const formData = new FormData();
+        formData.append("title", singleCategory.title);
+        formData.append("slug", singleCategory.slug);
+        formData.append("description", singleCategory.description);
+        formData.append("metaTitle", singleCategory.metaTitle);
+        formData.append("metaDescription", singleCategory.metaDescription);
+        formData.append("metaKeyword", singleCategory.metaKeyword);
+
+        formData.append("status", checked.status ? "1" : "0");
+        if (inputImage) {
+            formData.append("image", inputImage.image);
+        }
+
         axiosClient
-            .put(`/category/${params.id}`, data)
+            .post(`/category/${params.id}`, formData)
             .then((data) => {
                 navigate("/admin/category");
             })
@@ -103,6 +129,19 @@ const EditCategory = () => {
                                     />
                                 </Form.Group>
                                 <Form.Group
+                                    controlId="formFile"
+                                    className="mb-3"
+                                >
+                                    <Form.Label>
+                                        Default file input example
+                                    </Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        name="image"
+                                        onChange={handleImage}
+                                    />
+                                </Form.Group>
+                                <Form.Group
                                     className="mb-3"
                                     controlId="formBasicCheckbox"
                                 >
@@ -110,7 +149,7 @@ const EditCategory = () => {
                                         type="checkbox"
                                         label="Hide"
                                         name="status"
-                                        onChange={handleChange}
+                                        onChange={handleCheck}
                                         checked={
                                             singleCategory.status
                                                 ? "checked"
@@ -131,7 +170,7 @@ const EditCategory = () => {
                                         placeholder="Meta Title"
                                         name="metaTitle"
                                         onChange={handleChange}
-                                        value={singleCategory.meta_title}
+                                        value={singleCategory.metaTitle}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -144,7 +183,7 @@ const EditCategory = () => {
                                         placeholder="Meta Keyword"
                                         name="metaKeyword"
                                         onChange={handleChange}
-                                        value={singleCategory.meta_keyword}
+                                        value={singleCategory.metaKeyword}
                                     />
                                 </Form.Group>
                                 <Form.Group
@@ -157,7 +196,7 @@ const EditCategory = () => {
                                         rows={3}
                                         name="metaDescription"
                                         onChange={handleChange}
-                                        value={singleCategory.meta_description}
+                                        value={singleCategory.metaDescription}
                                     />
                                 </Form.Group>
                             </Tab>

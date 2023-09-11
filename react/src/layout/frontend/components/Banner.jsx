@@ -5,7 +5,7 @@ import Container from "react-bootstrap/esm/Container";
 const Banner = () => {
     return (
         <div className="banner d-flex align-items-center">
-            <Container className="" fluid="xxl">
+            <Container className="" fluid="xl">
                 <Row>
                     <Col>
                         <h4>Trade-in-offer</h4>

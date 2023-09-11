@@ -153,6 +153,7 @@ class ProductController extends Controller
     }
     public function delete(Product $product)
     {
+        unlink($product->image);
         $product->delete();
         return response()->json([
             'message' => 'product deleted successfully'

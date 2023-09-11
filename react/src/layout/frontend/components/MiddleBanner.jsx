@@ -7,7 +7,7 @@ import Row from "react-bootstrap/esm/Row";
 const MiddleBanner = () => {
     return (
         <div className="banner-bg d-flex justify-content-center align-items-center">
-            <Container className="" fluid="xxl">
+            <Container className="" fluid="xl">
                 <Row>
                     <Col className="text-center my-3 text-white">
                         <div className="">

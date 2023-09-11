@@ -6,21 +6,10 @@ import Button from "react-bootstrap/esm/Button";
 import { useAuthContext } from "../../../context/AuthContext";
 
 const Products = () => {
-    const [loading, setLoading] = useState(false);
-    const [fetchedData, setFetchedData] = useState([]);
+    const { getFetcher, fetchedData, loading, errors } = useAuthContext();
+
     useEffect(() => {
-        setLoading(true);
-        axiosClient
-            .get("/product")
-            .then(({ data }) => {
-                setFetchedData(data.data);
-                console.log(data.data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
+        getFetcher("/product");
     }, []);
     const onDelete = (id) => {
         alert("are you sure you want to delete this?");
@@ -33,11 +22,13 @@ const Products = () => {
                 console.log(error);
             });
     };
-
+    if (loading) {
+        return <h1 className="bg-danger">loading.......</h1>;
+    }
     return (
         <div>
-            {loading ? (
-                <h1 className="bg-danger">loading.......</h1>
+            {fetchedData.length <= 0 ? (
+                <h1>there are not products to show</h1>
             ) : (
                 <Table striped bordered hover>
                     <thead>
@@ -46,7 +37,7 @@ const Products = () => {
                             <th>title</th>
                             <th>Category name</th>
                             <th>slug</th>
-                            <th>description</th>
+
                             <th>original price</th>
                             <th>selling price</th>
                             <th>quantity</th>
@@ -62,9 +53,9 @@ const Products = () => {
                             <tr key={d.id}>
                                 <td>{d.id}</td>
                                 <td>{d.title}</td>
-                                <td>{d.category_id}</td>
+                                <td>{d.category.title}</td>
                                 <td>{d.slug}</td>
-                                <td>{d.description}</td>
+
                                 <td>{d.original_price}</td>
                                 <td>{d.selling_price}</td>
                                 <td>{d.quantity}</td>
@@ -104,3 +95,4 @@ const Products = () => {
 };
 
 export default Products;
+// Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, provident. Eligendi facere omnis officiis. Necessitatibus cumque natus ad assumenda at tenetur consequuntur illum dicta? Fugiat cupiditate est ullam, perspiciatis, officiis numquam beatae sint, iure voluptatibus deserunt architecto sequi! Dolor debitis tempora ipsa nemo corrupti. Error ad officiis quis maxime autem consequatur nemo quidem esse earum! Natus quidem voluptatem est repellendus laboriosam dicta error laborum sed vel quae, dolores iusto beatae nesciunt vero illum reiciendis quam, molestias dolorum doloribus fugiat numquam, totam vitae. Perferendis voluptas nesciunt nobis corrupti, quidem et similique quas a illum, facilis eaque distinctio sequi officiis ut, libero dolore quos laudantium voluptatum! Enim magnam vel hic iste dolor nulla, fugit soluta! Quae qui sequi, eligendi aliquam beatae earum, maiores magnam amet nesciunt accusamus mollitia nulla minima porro quibusdam, cumque voluptatum consequatur nisi aut quaerat est. Eveniet, nemo dolore. Cum, veritatis aliquam laboriosam officiis nemo, reiciendis ex iusto harum aut beatae quod rem! Magni omnis accusantium sapiente? Dolorem culpa vero similique perferendis molestiae aliquid in blanditiis, illum nihil sit repudiandae accusamus quaerat, tenetur deserunt? Alias, totam dignissimos vel soluta in illum, consequuntur ullam et rem enim voluptates aut nemo quasi ipsum consequatur delectus blanditiis, ducimus minus? Eos molestiae earum consequatur ut tempore blanditiis amet, suscipit deleniti minus nulla adipisci possimus sit repellendus ratione rem, voluptates dolorum cupiditate temporibus impedit, facere fuga? Cum unde id sint nam facere itaque. Excepturi hic iusto omnis odit ad cumque officia laborum eveniet tempora! Dicta aliquid, explicabo sunt ipsam laudantium earum eaque exercitationem nam nesciunt voluptatem cum reprehenderit veniam reiciendis expedita omnis nulla a numquam officiis molestiae iure, minus officia sit? Laborum fugiat temporibus optio ipsum odio sit doloremque minus quia, aliquam voluptates necessitatibus ipsa nostrum non ab aperiam cumque debitis illo dolore mollitia excepturi deserunt culpa? Quo architecto reprehenderit nulla quod qui cupiditate?

@@ -11,7 +11,7 @@ import Feature6 from "../../../assets/frontend/img/features/f6.png";
 
 const AboutBoxes = () => {
     return (
-        <Container className="my-5" fluid="xxl">
+        <Container className="my-5" fluid="xl">
             <Row>
                 <Col lg={2} className="" md={4} sm={6}>
                     <div className="feature-card p-3 card-n card1 ">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -19,8 +20,6 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
-
-
         $data = $request->validate([
             'title' => ['required', 'max:191'],
             'slug' => ['required', 'max:191'],
@@ -59,21 +58,36 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
 
-        $data = $request->validate([
-            'title' => ['required', 'max:191'],
-            'slug' => ['required', 'max:191'],
-            'description' => ['required', 'max:191'],
-        ]);
-        $status = $request->status ? '1' : '0';
 
+        $last_name = '';
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $img_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/categories'), $img_name);
+            $last_name = 'uploads/categories/' . $img_name;
+            if (File::exists(public_path($category->image))) {
+                unlink($category->image);
+            }
+            $category->update([
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'description' => $request->description,
+                'meta_title' => $request->metaTitle,
+                'meta_keyword' => $request->metaKeyword,
+                'meta_description' => $request->metaDescription,
+                'status' =>  $request->status,
+                'image' => $last_name
+            ]);
+        }
         $category->update([
-            'title' => $data['title'],
-            'slug' => $data['slug'],
-            'description' => $data['description'],
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'description' => $request->description,
             'meta_title' => $request->metaTitle,
             'meta_keyword' => $request->metaKeyword,
             'meta_description' => $request->metaDescription,
-            'status' =>  $status
+            'status' =>  $request->status,
+
         ]);
     }
     public function delete(Category $category)

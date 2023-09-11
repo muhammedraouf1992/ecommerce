@@ -55,7 +55,7 @@ const Category = () => {
                                     />
                                 </td>
                                 <td>{`${d.status ? "Hidden" : "Visible"}`}</td>
-                                <td className="d-flex ">
+                                <td className="d-flex">
                                     <Link
                                         to={`/admin/category/edit/${d.id}`}
                                         className="btn btn-warning mx-2"

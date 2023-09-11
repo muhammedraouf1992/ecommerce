@@ -16,7 +16,7 @@ const Footer = () => {
 
     return (
         <div className="py-5 footer">
-            <Container fluid="xxl">
+            <Container fluid="xl">
                 <Row>
                     <Col lg={6} className="text-white">
                         <h1>Ecommerce</h1>
