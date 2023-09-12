@@ -62,6 +62,7 @@ const Products = () => {
                             <th>image</th>
                             <th>status</th>
                             <th>popular</th>
+                            <th>featured</th>
                             <th>actions</th>
                         </tr>
                     </thead>
@@ -87,6 +88,7 @@ const Products = () => {
 
                                 <td>{`${d.status ? "Hidden" : "Visible"}`}</td>
                                 <td>{`${d.popular ? "yes" : "no"}`}</td>
+                                <td>{`${d.featured ? "yes" : "no"}`}</td>
                                 <td className="d-flex ">
                                     <Link
                                         to={`/admin/product/edit/${d.id}`}

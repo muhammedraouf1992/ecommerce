@@ -71,3 +71,119 @@
 .card6 p {
     background-color: #fff2e5;
 }
+img {
+    width: 100%;
+}
+.product-card {
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 2rem;
+    box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+.product-details p {
+    color: rgb(70, 70, 70);
+    font-size: 20px !important;
+}
+.product-details h4 {
+    color: #088178;
+    text-transform: capitalize;
+}
+.product-icons {
+    color: goldenrod;
+    font-size: 1.3rem;
+}
+.price {
+    color: #088178;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.cart {
+    font-size: 1.5rem;
+    color: #088178;
+    transition: 0.3s;
+}
+.background {
+    background-color: #dcf1f0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.product-card:hover {
+    box-shadow: 0.3rem 0.3rem 3rem rgba(0, 0, 0, 0.2);
+}
+.background:hover {
+    background-color: #088178;
+}
+.background:hover .cart {
+    color: white;
+}
+.space {
+    margin: 8rem auto !important;
+}
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+    margin-top: 1rem;
+}
+.banner-bg {
+    background-image: url("./assets/frontend/img/banner/b2.jpg");
+    width: 100%;
+    height: 40vh;
+    margin: 8rem auto;
+    object-fit: contain;
+    background-position: center;
+}
+.button:hover {
+    background-color: #088178 !important;
+    color: white !important;
+    border: none !important;
+    outline: none !important;
+}
+.button {
+    border: none !important;
+    outline: none !important;
+}
+.col-background_1 {
+    background-image: url("./assets/frontend/img/banner/b17.jpg");
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.col-background_2 {
+    background-image: url("./assets/frontend/img/banner/b10.jpg");
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.col-background_3 {
+    background-image: url("./assets/frontend/img/banner/b7.jpg");
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.col-background_4 {
+    background-image: url("./assets/frontend/img/banner/b16.jpg");
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
+}
+.col-background_5 {
+    background-image: url("./assets/frontend/img/banner/b18.jpg");
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.col-details p {
+    background: #000;
+}

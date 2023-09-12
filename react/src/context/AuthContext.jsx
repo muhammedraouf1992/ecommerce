@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import axiosClient from "../axios";
-import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
