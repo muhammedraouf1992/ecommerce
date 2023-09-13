@@ -89,12 +89,16 @@ const Footer = () => {
                                     Install App
                                 </h6>
                                 <div>
-                                    <p>from app store or google play</p>
+                                    <p className="text-capitalize">
+                                        from app store or google play
+                                    </p>
                                     <div className="pictures">
                                         <img src={Pay1} alt="" />
                                         <img src={Pay2} alt="" />
                                     </div>
-                                    <p>secured payment</p>
+                                    <p className="text-capitalize">
+                                        secured payment
+                                    </p>
                                     <img src={Pay3} alt="" className="imgg" />
                                 </div>
                             </Col>
