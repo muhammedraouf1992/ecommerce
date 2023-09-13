@@ -5,6 +5,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import MiddleBanner from "../components/MiddleBanner";
 import PopularProducts from "../components/PopularProducts";
 import PromotionComponent from "../components/PromotionComponent";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
     return (
@@ -15,6 +16,7 @@ const HomePage = () => {
             <MiddleBanner />
             <PopularProducts />
             <PromotionComponent />
+            <Footer />
         </div>
     );
 };

@@ -13,7 +13,7 @@ const AboutBoxes = () => {
     return (
         <Container className="my-5" fluid="xxl">
             <Row>
-                <Col lg={2} className="">
+                <Col lg={2} className="" md={4} sm={6}>
                     <div className="feature-card p-3 card card1 ">
                         <div>
                             <img src={Feature1} alt="" width={"100%"} />
@@ -21,7 +21,7 @@ const AboutBoxes = () => {
                         </div>
                     </div>
                 </Col>
-                <Col lg={2}>
+                <Col lg={2} md={4} sm={6}>
                     <div className="feature-card p-3 card card2 ">
                         <div>
                             <img src={Feature2} alt="" width={"100%"} />
@@ -29,7 +29,7 @@ const AboutBoxes = () => {
                         </div>
                     </div>
                 </Col>
-                <Col lg={2}>
+                <Col lg={2} md={4} sm={6}>
                     <div className="feature-card p-3 card card3 ">
                         <div>
                             <img src={Feature3} alt="" width={"100%"} />
@@ -37,7 +37,7 @@ const AboutBoxes = () => {
                         </div>
                     </div>
                 </Col>
-                <Col lg={2}>
+                <Col lg={2} md={4} sm={6}>
                     <div className="feature-card p-3 card card4 ">
                         <div>
                             <img src={Feature4} alt="" width={"100%"} />
@@ -45,7 +45,7 @@ const AboutBoxes = () => {
                         </div>
                     </div>
                 </Col>
-                <Col lg={2}>
+                <Col lg={2} md={4} sm={6}>
                     <div className="feature-card p-3 card card5 ">
                         <div>
                             <img src={Feature5} alt="" width={"100%"} />
@@ -53,7 +53,7 @@ const AboutBoxes = () => {
                         </div>
                     </div>
                 </Col>
-                <Col lg={2}>
+                <Col lg={2} md={4} sm={6}>
                     <div className="feature-card p-3 card card6 ">
                         <div>
                             <img src={Feature6} alt="" width={"100%"} />

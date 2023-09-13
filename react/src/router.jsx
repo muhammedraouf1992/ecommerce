@@ -23,6 +23,8 @@ import Checkout from "./layout/frontend/pages/Checkout";
 import Paypal from "./layout/frontend/pages/Paypal";
 import Orders from "./components/admin/orders/orders";
 import OrderItem from "./components/admin/orders/OrderItem";
+import PrivacyPolicy from "./layout/frontend/pages/PrivacyPolicy";
+import Terms from "./layout/frontend/pages/Terms";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
             {
                 path: "/checkout",
                 element: <Checkout />,
+            },
+            {
+                path: "/privacy",
+                element: <PrivacyPolicy />,
+            },
+            {
+                path: "/terms",
+                element: <Terms />,
             },
         ],
     },
