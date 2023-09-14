@@ -26,17 +26,26 @@ class CategoryController extends Controller
             'slug' => ['required', 'max:191'],
             'description' => ['required', 'max:191'],
         ]);
+        $last_name = '';
+        if ($request->hasFile('image')) {
+            $image = $request->image;
+            $img_name = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('uploads/categories'), $img_name);
+            $last_name = 'uploads/categories/' . $img_name;
+        } else {
+            $last_name = 'noimage';
+        }
 
-        $status = $request->status ? '1' : '0';
+
         Category::create([
             'title' => $data['title'],
             'slug' => $data['slug'],
             'description' => $data['description'],
-
+            'image' => $last_name,
             'meta_title' => $request->metaTitle,
             'meta_keyword' => $request->metaKeyword,
             'meta_description' => $request->metaDescription,
-            'status' =>  $status
+            'status' =>  $request->status
         ]);
         return response()->json([
             'message' => 'category added', 200

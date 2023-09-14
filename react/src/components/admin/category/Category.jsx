@@ -35,6 +35,7 @@ const Category = () => {
                             <th>title</th>
                             <th>slug</th>
                             <th>description</th>
+                            <th>image</th>
                             <th>status</th>
                             <th>actions</th>
                         </tr>
@@ -46,6 +47,13 @@ const Category = () => {
                                 <td>{d.title}</td>
                                 <td>{d.slug}</td>
                                 <td>{d.description}</td>
+                                <td>
+                                    <img
+                                        src={`http://127.0.0.1:8000/${d.image}`}
+                                        alt=""
+                                        style={{ width: "100px" }}
+                                    />
+                                </td>
                                 <td>{`${d.status ? "Hidden" : "Visible"}`}</td>
                                 <td className="d-flex ">
                                     <Link

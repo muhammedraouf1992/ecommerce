@@ -14,7 +14,7 @@ const AboutBoxes = () => {
         <Container className="my-5" fluid="xxl">
             <Row>
                 <Col lg={2} className="" md={4} sm={6}>
-                    <div className="feature-card p-3 card card1 ">
+                    <div className="feature-card p-3 card-n card1 ">
                         <div>
                             <img src={Feature1} alt="" width={"100%"} />
                             <p>happy sell</p>
@@ -22,7 +22,7 @@ const AboutBoxes = () => {
                     </div>
                 </Col>
                 <Col lg={2} md={4} sm={6}>
-                    <div className="feature-card p-3 card card2 ">
+                    <div className="feature-card p-3 card-n card2 ">
                         <div>
                             <img src={Feature2} alt="" width={"100%"} />
                             <p>Free Shipping</p>
@@ -30,7 +30,7 @@ const AboutBoxes = () => {
                     </div>
                 </Col>
                 <Col lg={2} md={4} sm={6}>
-                    <div className="feature-card p-3 card card3 ">
+                    <div className="feature-card p-3 card-n card3 ">
                         <div>
                             <img src={Feature3} alt="" width={"100%"} />
                             <p>Online order</p>
@@ -38,7 +38,7 @@ const AboutBoxes = () => {
                     </div>
                 </Col>
                 <Col lg={2} md={4} sm={6}>
-                    <div className="feature-card p-3 card card4 ">
+                    <div className="feature-card p-3 card-n card4 ">
                         <div>
                             <img src={Feature4} alt="" width={"100%"} />
                             <p>save money</p>
@@ -46,7 +46,7 @@ const AboutBoxes = () => {
                     </div>
                 </Col>
                 <Col lg={2} md={4} sm={6}>
-                    <div className="feature-card p-3 card card5 ">
+                    <div className="feature-card p-3 card-n card5 ">
                         <div>
                             <img src={Feature5} alt="" width={"100%"} />
                             <p>promotions</p>
@@ -54,7 +54,7 @@ const AboutBoxes = () => {
                     </div>
                 </Col>
                 <Col lg={2} md={4} sm={6}>
-                    <div className="feature-card p-3 card card6 ">
+                    <div className="feature-card p-3 card-n card6 ">
                         <div>
                             <img src={Feature6} alt="" width={"100%"} />
                             <p>f24/7 support</p>

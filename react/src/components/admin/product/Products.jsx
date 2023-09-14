@@ -3,29 +3,19 @@ import Table from "react-bootstrap/Table";
 import axiosClient from "../../../axios";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/esm/Button";
+import { useAuthContext } from "../../../context/AuthContext";
 
 const Products = () => {
-    const [fetchedProducts, setFetchedProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    const getAllData = () => {
-        axiosClient
-            .get("/product")
-            .then(({ data }) => {
-                setFetchedProducts(data.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
+    const [fetchedData, setFetchedData] = useState([]);
     useEffect(() => {
         setLoading(true);
         axiosClient
             .get("/product")
             .then(({ data }) => {
-                setFetchedProducts(data.data);
-                setLoading(false);
+                setFetchedData(data.data);
                 console.log(data.data);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -37,12 +27,13 @@ const Products = () => {
         axiosClient
             .delete(`/product/${id}`)
             .then(() => {
-                getAllData();
+                getFetcher("/product");
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+
     return (
         <div>
             {loading ? (
@@ -67,11 +58,11 @@ const Products = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {fetchedProducts.map((d) => (
+                        {fetchedData.map((d) => (
                             <tr key={d.id}>
                                 <td>{d.id}</td>
                                 <td>{d.title}</td>
-                                <td>{d.category.title}</td>
+                                <td>{d.category_id}</td>
                                 <td>{d.slug}</td>
                                 <td>{d.description}</td>
                                 <td>{d.original_price}</td>

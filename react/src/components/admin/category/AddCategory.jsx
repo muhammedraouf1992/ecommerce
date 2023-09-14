@@ -4,12 +4,12 @@ import Tabs from "react-bootstrap/Tabs";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import axiosClient from "../../../axios";
-
 import { useAuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 const AddCategory = () => {
     const { postFetcher, postErrors } = useAuthContext();
+    const [inputImage, setInputImage] = useState();
+    const [checked, setChecked] = useState({ status: null });
     const navigate = useNavigate();
     const [inputData, setInputData] = useState({
         title: "",
@@ -23,15 +23,32 @@ const AddCategory = () => {
         setInputData({
             ...inputData,
             [e.target.name]: e.target.value,
-            status: e.target.checked,
         });
     };
-
+    const handleChecked = (e) => {
+        setChecked({ status: e.target.checked });
+        console.log(checked);
+    };
+    const handleImage = (e) => {
+        setInputImage({ image: e.target.files[0] });
+        console.log(inputImage);
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = { ...inputData };
+        const formData = new FormData();
+        formData.append("title", inputData.title);
+        formData.append("slug", inputData.slug);
+        formData.append("description", inputData.description);
+        formData.append("metaTitle", inputData.metaTitle);
+        formData.append("metaDescription", inputData.metaDescription);
+        formData.append("metaKeyword", inputData.metaKeyword);
 
-        postFetcher("/category", data, "/admin/category");
+        formData.append("status", checked.status ? "1" : "0");
+        if (inputImage) {
+            formData.append("image", inputImage.image);
+        }
+
+        postFetcher("/category", formData, "/admin/category");
         navigate("/admin/category");
     };
 
@@ -77,6 +94,15 @@ const AddCategory = () => {
                                 rows={3}
                                 name="description"
                                 onChange={handleChange}
+                                placeholder="Description"
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Default file input example</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="image"
+                                onChange={handleImage}
                             />
                         </Form.Group>
                         <Form.Group
@@ -87,7 +113,7 @@ const AddCategory = () => {
                                 type="checkbox"
                                 label="Hide"
                                 name="status"
-                                onChange={handleChange}
+                                onChange={handleChecked}
                             />
                         </Form.Group>
                     </Tab>
@@ -126,6 +152,7 @@ const AddCategory = () => {
                                 rows={3}
                                 name="metaDescription"
                                 onChange={handleChange}
+                                placeholder="Meta Description"
                             />
                         </Form.Group>
                     </Tab>

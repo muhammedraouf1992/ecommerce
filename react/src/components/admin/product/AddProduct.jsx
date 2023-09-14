@@ -48,6 +48,7 @@ const AddProduct = () => {
     };
     const handleImage = (e) => {
         setInputImage({ image: e.target.files[0] });
+        console.log(inputImage);
     };
     const handleCheck = (e) => {
         setChecked({ ...checked, [e.target.name]: e.target.checked });
