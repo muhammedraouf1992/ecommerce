@@ -27,42 +27,61 @@ const Collection = () => {
     }
 
     return (
-        <Container fluid="xl my-5">
-            <Row>
-                {fetchData.length < 1 ? (
-                    <h1 className="text-danger text-uppercase">
-                        there is no categories to be shows
-                    </h1>
-                ) : (
-                    fetchData.map((f) => (
-                        <Col lg={4} md={6} sm={12} key={f.id}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Img
-                                        variant="top"
-                                        src={`http://127.0.0.1:8000/${f.image}`}
-                                        style={{
-                                            width: "150px",
-                                            height: "150px",
-                                        }}
-                                    />
-                                    <Card.Title className="text-capitalize mt-3">
-                                        {f.title}
-                                    </Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">
-                                        {f.slug}
-                                    </Card.Subtitle>
-                                    <Card.Text>{f.description}</Card.Text>
-                                    <Card.Link href={`product/${f.id}`}>
-                                        View Products
-                                    </Card.Link>
-                                </Card.Body>
-                            </Card>
+        <>
+            <div className="shop-banner d-flex  align-items-center">
+                <Container>
+                    <Row>
+                        <Col>
+                            <div className="text-center">
+                                <h2 className="fs-1 text-white text-capitalize fw-bold">
+                                    #Stayhome
+                                </h2>
+                                <p className="fs-4 text-white text-capitalize">
+                                    Lorem ipsum, dolor sit amet consectetur
+                                    adipisicing.
+                                </p>
+                            </div>
                         </Col>
-                    ))
-                )}
-            </Row>
-        </Container>
+                    </Row>
+                </Container>
+            </div>
+            <Container fluid="xl my-5">
+                <Row>
+                    {fetchData.length < 1 ? (
+                        <h1 className="text-danger text-uppercase">
+                            there is no categories to be shows
+                        </h1>
+                    ) : (
+                        fetchData.map((f) => (
+                            <Col lg={4} md={6} sm={12} key={f.id}>
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Img
+                                            variant="top"
+                                            src={`http://127.0.0.1:8000/${f.image}`}
+                                            style={{
+                                                width: "150px",
+                                                height: "150px",
+                                            }}
+                                        />
+                                        <Card.Title className="text-capitalize mt-3">
+                                            {f.title}
+                                        </Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">
+                                            {f.slug}
+                                        </Card.Subtitle>
+                                        <Card.Text>{f.description}</Card.Text>
+                                        <Card.Link href={`product/${f.id}`}>
+                                            View Products
+                                        </Card.Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))
+                    )}
+                </Row>
+            </Container>
+        </>
     );
 };
 

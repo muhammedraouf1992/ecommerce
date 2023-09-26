@@ -6,6 +6,7 @@ import Row from "react-bootstrap/esm/Row";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/esm/Button";
+import Container from "react-bootstrap/esm/Container";
 
 const SingleProduct = () => {
     const params = useParams();
@@ -70,60 +71,74 @@ const SingleProduct = () => {
     };
     return (
         <>
-            {message && <h1>{message}</h1>}
-            <Col lg={5} md={6} sm={12}>
-                <img
-                    src={`http://127.0.0.1:8000/${fetchData.image}`}
-                    alt=""
-                    width={"100%"}
-                    className="rounded"
-                />
-            </Col>
-            <Col lg={7} md={6} sm={12}>
-                <div>
-                    <h1 className="text-capitalize">{fetchData.title}</h1>
-                    <p className="text-capitalize">{fetchData.description}</p>
-                </div>
-                <div>
-                    <span className="mr-5 text-danger fs-4">
-                        <s>{fetchData.original_price}$</s>
-                    </span>
-                    <span className="fs-4">{fetchData.selling_price}$</span>
-                </div>
-                <div>
-                    {fetchData.quantity > 0 ? (
-                        <span className="py-2 px-4 bg-success text-white mt-2 d-inline-block text-uppercase">
-                            in stock
-                        </span>
-                    ) : (
-                        <span className="py-2 px-4 bg-danger text-white mt-2 d-inline-block text-uppercase">
-                            out of stock
-                        </span>
-                    )}
-                </div>
-                {fetchData.quantity > 0 && (
-                    <Row>
-                        <Col md={3}>
-                            <InputGroup className="mb-3 mt-3">
-                                <Button onClick={handleMinus}>-</Button>
-                                <div className="px-3 py-1 text-center">
-                                    {productCount}
-                                </div>
-                                <Button onClick={handlePlus}>+</Button>
-                            </InputGroup>
-                        </Col>
+            <Container className="space" fluid="xl">
+                <Row>
+                    {message && <h1>{message}</h1>}
 
-                        <Col md={3} className="mt-3">
-                            <Button onClick={addToCart}>Add to Cart</Button>
-                        </Col>
-                    </Row>
-                )}
-                <div>
-                    <button className="btn btn-danger mt-3">
-                        Add to wishlist
-                    </button>
-                </div>
-            </Col>
+                    <Col lg={5} md={6} sm={12}>
+                        <img
+                            src={`http://127.0.0.1:8000/${fetchData.image}`}
+                            alt=""
+                            width={"100%"}
+                            className="rounded"
+                        />
+                    </Col>
+                    <Col lg={7} md={6} sm={12}>
+                        <div>
+                            <h1 className="text-capitalize">
+                                {fetchData.title}
+                            </h1>
+                            <p className="text-capitalize">
+                                {fetchData.description}
+                            </p>
+                        </div>
+                        <div>
+                            <span className="mr-5 text-danger fs-4">
+                                <s>{fetchData.original_price}$</s>
+                            </span>
+                            <span className="fs-4">
+                                {fetchData.selling_price}$
+                            </span>
+                        </div>
+                        <div>
+                            {fetchData.quantity > 0 ? (
+                                <span className="py-2 px-4 bg-success text-white mt-2 d-inline-block text-uppercase">
+                                    in stock
+                                </span>
+                            ) : (
+                                <span className="py-2 px-4 bg-danger text-white mt-2 d-inline-block text-uppercase">
+                                    out of stock
+                                </span>
+                            )}
+                        </div>
+
+                        {fetchData.quantity > 0 && (
+                            <Row>
+                                <Col md={3}>
+                                    <InputGroup className="mb-3 mt-3">
+                                        <Button onClick={handleMinus}>-</Button>
+                                        <div className="px-3 py-1 text-center">
+                                            {productCount}
+                                        </div>
+                                        <Button onClick={handlePlus}>+</Button>
+                                    </InputGroup>
+                                </Col>
+
+                                <Col md={3} className="mt-3">
+                                    <Button onClick={addToCart}>
+                                        Add to Cart
+                                    </Button>
+                                </Col>
+                            </Row>
+                        )}
+                        <div>
+                            <button className="btn btn-danger mt-3">
+                                Add to wishlist
+                            </button>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 };

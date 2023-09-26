@@ -16,7 +16,7 @@ const FeaturedProducts = () => {
     const filteredData = fetchedData.filter((product) => {
         return product.featured === 1;
     });
-    console.log(filteredData);
+
     if (loading) {
         return <h1>....loading</h1>;
     }
@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
             </Row>
             <Row>
                 {filteredData.map((data) => (
-                    <Col lg={3} key={data.id} className="my-2">
+                    <Col lg={4} key={data.id} className="my-2">
                         <div className="p-2 border product-card rounded-5">
                             <div className="product-card-image ">
                                 <img

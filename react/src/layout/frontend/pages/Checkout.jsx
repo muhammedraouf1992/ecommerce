@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import axiosClient from "../../../axios";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "bootstrap";
 
 const Checkout = () => {
     const [show, setShow] = useState(false);

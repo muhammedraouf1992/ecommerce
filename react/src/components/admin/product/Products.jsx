@@ -10,6 +10,7 @@ const Products = () => {
 
     useEffect(() => {
         getFetcher("/product");
+        console.log(fetchedData);
     }, []);
     const onDelete = (id) => {
         alert("are you sure you want to delete this?");

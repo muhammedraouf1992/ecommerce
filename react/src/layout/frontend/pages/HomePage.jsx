@@ -5,9 +5,12 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import MiddleBanner from "../components/MiddleBanner";
 import PopularProducts from "../components/PopularProducts";
 import PromotionComponent from "../components/PromotionComponent";
-import Footer from "../components/Footer";
+
+import { useAuthContext } from "../../../context/AuthContext";
 
 const HomePage = () => {
+    const { user } = useAuthContext();
+    console.log(user);
     return (
         <div>
             <Banner />
@@ -16,7 +19,6 @@ const HomePage = () => {
             <MiddleBanner />
             <PopularProducts />
             <PromotionComponent />
-            <Footer />
         </div>
     );
 };

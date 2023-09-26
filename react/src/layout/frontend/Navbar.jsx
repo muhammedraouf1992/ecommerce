@@ -41,11 +41,9 @@ function NavScrollExample() {
                             Cart
                         </Link>
 
-                        {user.role_as ? (
-                            <Link className="mx-2" to="/admin">
-                                Admin
-                            </Link>
-                        ) : null}
+                        <Link className="mx-2" to="/admin">
+                            Admin
+                        </Link>
 
                         {!token ? (
                             <>

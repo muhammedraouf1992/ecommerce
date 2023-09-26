@@ -7,6 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import { Link } from "react-router-dom";
+import Container from "react-bootstrap/esm/Container";
 const Cart = () => {
     const [cartData, setCartData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -112,94 +113,110 @@ const Cart = () => {
     );
 
     return (
-        <div>
-            {cartData.length == 0 ? (
-                <h1>there is no items in the cart</h1>
-            ) : (
-                <>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>product image</th>
-                                <th>product name</th>
-                                <th>price</th>
-                                <th>quantity</th>
-                                <th>total price</th>
-                                <th>actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cartData.map((d) => (
-                                <tr key={d.id}>
-                                    <td>
-                                        <img
-                                            src={`http://127.0.0.1:8000/${d.product.image}`}
-                                            alt=""
-                                            width={"100px"}
-                                        />
-                                    </td>
-                                    <td>{d.product.title}</td>
-                                    <td>{d.product.selling_price}</td>
+        <Container>
+            <div>
+                {cartData.length == 0 ? (
+                    <h1>there is no items in the cart</h1>
+                ) : (
+                    <>
+                        <Row>
+                            <Col>
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>product image</th>
+                                            <th>product name</th>
+                                            <th>price</th>
+                                            <th>quantity</th>
+                                            <th>total price</th>
+                                            <th>actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {cartData.map((d) => (
+                                            <tr key={d.id}>
+                                                <td>
+                                                    <img
+                                                        src={`http://127.0.0.1:8000/${d.product.image}`}
+                                                        alt=""
+                                                        style={{
+                                                            width: "100px",
+                                                        }}
+                                                    />
+                                                </td>
+                                                <td>{d.product.title}</td>
+                                                <td>
+                                                    {d.product.selling_price}
+                                                </td>
 
-                                    <td>
-                                        <InputGroup className="mb-3 mt-3">
-                                            <Button
-                                                onClick={() =>
-                                                    handleMinus(d.id)
-                                                }
-                                            >
-                                                -
-                                            </Button>
-                                            <div className="px-3 py-1 text-center">
-                                                {d.product_quantity}
-                                            </div>
-                                            <Button
-                                                onClick={() => handlePlus(d.id)}
-                                            >
-                                                +
-                                            </Button>
-                                        </InputGroup>
-                                    </td>
-                                    <td>
-                                        {d.product.selling_price *
-                                            d.product_quantity}
-                                    </td>
-                                    <td>
-                                        <Button
-                                            variant="danger"
-                                            onClick={() => onDelete(d.id)}
+                                                <td>
+                                                    <InputGroup className="mb-3 mt-3">
+                                                        <Button
+                                                            onClick={() =>
+                                                                handleMinus(
+                                                                    d.id
+                                                                )
+                                                            }
+                                                        >
+                                                            -
+                                                        </Button>
+                                                        <div className="px-3 py-1 text-center">
+                                                            {d.product_quantity}
+                                                        </div>
+                                                        <Button
+                                                            onClick={() =>
+                                                                handlePlus(d.id)
+                                                            }
+                                                        >
+                                                            +
+                                                        </Button>
+                                                    </InputGroup>
+                                                </td>
+                                                <td>
+                                                    {d.product.selling_price *
+                                                        d.product_quantity}
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        variant="danger"
+                                                        onClick={() =>
+                                                            onDelete(d.id)
+                                                        }
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </Row>
+                        <Row className="d-flex justify-content-end">
+                            <Col sm={4}>
+                                <Card>
+                                    <Card.Body>
+                                        <Card.Title>
+                                            subtotal :{totalPrice}$
+                                        </Card.Title>
+                                        <Card.Title>
+                                            total :{totalPrice}$
+                                        </Card.Title>
+
+                                        <Link
+                                            className="btn btn-success btn-sm"
+                                            to="/checkout"
                                         >
-                                            Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
-                    <Row className="d-flex justify-content-end">
-                        <Col sm={4}>
-                            <Card>
-                                <Card.Body>
-                                    <Card.Title>
-                                        subtotal :{totalPrice}$
-                                    </Card.Title>
-                                    <Card.Title>
-                                        total :{totalPrice}$
-                                    </Card.Title>
-
-                                    <Link
-                                        className="btn btn-success btn-sm"
-                                        to="/checkout"
-                                    >
-                                        Checkout
-                                    </Link>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </>
-            )}
-        </div>
+                                            Checkout
+                                        </Link>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </>
+                )}
+            </div>
+        </Container>
     );
 };
 

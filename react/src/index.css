@@ -15,6 +15,11 @@
     font-weight: bold;
     color: black;
 }
+.subheading {
+    font-size: 50px !important;
+    font-weight: bold;
+    color: black;
+}
 .heading span {
     color: #088178;
 }
@@ -229,4 +234,14 @@ img {
 }
 ul {
     padding-left: 0;
+}
+.about-banner {
+    background-image: url("../src/assets/frontend/img/about/banner.png");
+    height: 40vh;
+    background-position: center;
+}
+.shop-banner {
+    background-image: url("../src/assets/frontend/img/banner/b1.jpg");
+    height: 40vh;
+    background-position: center;
 }

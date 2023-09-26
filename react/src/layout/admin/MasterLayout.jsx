@@ -12,9 +12,6 @@ const MasterLayout = () => {
     if (!token) {
         return <Navigate to={"/login"} />;
     }
-    if (token && user.role_as === 0) {
-        return <Navigate to={"/"} />;
-    }
 
     return (
         <div id="page-top">
