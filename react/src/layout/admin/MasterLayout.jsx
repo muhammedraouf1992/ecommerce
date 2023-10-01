@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -12,7 +12,11 @@ const MasterLayout = () => {
     if (!token) {
         return <Navigate to={"/login"} />;
     }
-
+    if (user.role_as === 0) {
+        return <Navigate to="/" />;
+    }
+    console.log(user);
+    useEffect;
     return (
         <div id="page-top">
             <div id="wrapper">

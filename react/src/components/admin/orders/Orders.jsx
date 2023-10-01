@@ -22,10 +22,35 @@ const Orders = () => {
                 setLoading(false);
             });
     }, []);
+    const onDelete = (id) => {
+        axiosClient
+            .delete(`/delete-order/${id}`)
+            .then(() => {
+                setLoading(true);
+                axiosClient
+                    .get("/orders")
+                    .then(({ data }) => {
+                        console.log(data.data);
+                        setData(data.data);
+                        setLoading(false);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        setLoading(false);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     return (
         <div>
             {loading ? (
                 <h1 className="text-danger">loading.......</h1>
+            ) : data.length >= 0 ? (
+                <>
+                    <h1>there are no orders to show</h1>
+                </>
             ) : (
                 <Table striped bordered hover>
                     <thead>

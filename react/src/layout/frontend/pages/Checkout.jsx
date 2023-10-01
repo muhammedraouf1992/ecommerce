@@ -9,7 +9,10 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import axiosClient from "../../../axios";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "bootstrap";
+import Modal from "react-bootstrap/Modal";
+
+import Paypal from "./Paypal";
+import Container from "react-bootstrap/esm/Container";
 
 const Checkout = () => {
     const [show, setShow] = useState(false);
@@ -117,7 +120,7 @@ const Checkout = () => {
     }
 
     return (
-        <>
+        <Container>
             <>
                 <Modal
                     show={show}
@@ -141,7 +144,7 @@ const Checkout = () => {
             {cartData.length == 0 ? (
                 <h1>your cart is empty</h1>
             ) : (
-                <>
+                <Row>
                     <Col lg={7}>
                         <Card>
                             <Card.Header>Basic Information</Card.Header>
@@ -368,9 +371,9 @@ const Checkout = () => {
                             </tbody>
                         </Table>
                     </Col>
-                </>
+                </Row>
             )}
-        </>
+        </Container>
     );
 };
 

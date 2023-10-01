@@ -32,9 +32,10 @@ const OrderItem = () => {
         console.log(status);
     };
     const handleSubmit = (e) => {
+        const formData = { status: status ? 1 : 0 };
         e.preventDefault();
         axiosClient
-            .post("/edit-order-status", status)
+            .post(`/edit-order-status/${params.id}`, formData)
             .then((data) => {
                 console.log(data);
             })

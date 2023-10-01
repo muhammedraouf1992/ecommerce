@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2023 at 10:44 PM
+-- Generation Time: Oct 01, 2023 at 10:53 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,8 +41,7 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `user_id`, `product_id`, `product_quantity`, `created_at`, `updated_at`) VALUES
-(11, 2, 11, 1, NULL, NULL),
-(12, 3, 15, 2, NULL, '2023-09-26 17:42:03');
+(11, 2, 11, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -161,6 +160,14 @@ CREATE TABLE `order_items` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_price`, `product_quantity`, `created_at`, `updated_at`) VALUES
+(8, 5, 15, 400, 2, '2023-09-30 09:13:49', '2023-09-30 09:13:49'),
+(9, 5, 25, 5800, 1, '2023-09-30 09:13:49', '2023-09-30 09:13:49');
+
 -- --------------------------------------------------------
 
 --
@@ -201,7 +208,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (8, 'App\\Models\\User', 2, 'main', 'ea072d49d5eed708a5f5dec41a95619200c68ef1959c0b815f16607f9fa9d5cd', '[\"*\"]', NULL, NULL, '2023-09-01 19:12:59', '2023-09-01 19:12:59'),
 (10, 'App\\Models\\User', 3, 'main', 'ba3dd54e98838f6f9ce1ba2ba9411ab9ecfcbb1deb9324410206a0f0c012db76', '[\"*\"]', NULL, NULL, '2023-09-02 06:30:09', '2023-09-02 06:30:09'),
 (32, 'App\\Models\\User', 3, 'main', 'cc4d577b448ef8b05b3e5ebb20280fa9fa3164f2fb046c52d5477c8bd579c8a4', '[\"*\"]', NULL, NULL, '2023-09-26 15:14:02', '2023-09-26 15:14:02'),
-(34, 'App\\Models\\User', 3, 'main', 'b8842a2fdffa7dc1fbc1873e2f56514bbbd2bf702728267217222f9bfeaef3a9', '[\"*\"]', '2023-09-26 17:42:03', NULL, '2023-09-26 15:21:28', '2023-09-26 17:42:03');
+(35, 'App\\Models\\User', 4, 'main', '9f3abc4a055499e1bfea6deb277e8398df903b7dc91dad64101d4f63fab0c612', '[\"*\"]', '2023-10-01 17:47:11', NULL, '2023-09-30 09:54:30', '2023-10-01 17:47:11'),
+(36, 'App\\Models\\User', 4, 'main', 'a96a0f3ae29ffbe4ba758953b8e4a402eac12eb26235cd1c18c392a759e81ff1', '[\"*\"]', '2023-10-01 17:48:22', NULL, '2023-10-01 17:47:37', '2023-10-01 17:48:22'),
+(37, 'App\\Models\\User', 4, 'main', '95fe854622119b84d951595352901c487ce6753e6a404ec98362930e108f3f78', '[\"*\"]', '2023-10-01 17:50:38', NULL, '2023-10-01 17:48:42', '2023-10-01 17:50:38');
 
 -- --------------------------------------------------------
 
@@ -242,7 +251,7 @@ INSERT INTO `products` (`id`, `category_id`, `title`, `slug`, `description`, `me
 (12, 10, 'aliquid in blanditiis', 't-shirt', 'cumque officia laborum eveniet tempora! Dicta aliquid, explicabo sunt ipsam laudantium earum eaque exercitationem nam nesciunt voluptatem cum', 'Meta Title', 'Meta Keyword', 'Meta Description', '570', '500', 'h&m', 'uploads/products/65046ac8c0efe.jpg', '90', 0, 1, 0, '2023-09-15 11:31:36', '2023-09-15 11:31:36'),
 (13, 10, 'repellendus ratione rem', 't-shirt', 'Natus quidem voluptatem est repellendus laboriosam dicta error laborum sed vel quae, dolores iusto beatae nesciunt vero illum reiciendis quam', 'Meta Title', 'Meta Keyword', 'Meta Description', '780', '670', 'bershka', 'uploads/products/65046b2f5995d.jpg', '55', 0, 0, 1, '2023-09-15 11:33:19', '2023-09-15 11:33:19'),
 (14, 11, 'ibus deserunt architecto', 'shirts', 'Laborum fugiat temporibus optio ipsum odio sit doloremque minus quia, aliquam voluptates necessitatibus ipsa nostrum non ab aperiam cumque debitis illo', 'Meta Title', 'Meta Keyword', 'Meta Description', '400', '340', 'beneshty', 'uploads/products/650465a1cafd3.jpg', '34', 0, 1, 0, '2023-09-15 11:09:37', '2023-09-15 11:09:37'),
-(15, 11, 'quod qui cupiditate', 'shirts', 'totam vitae. Perferendis voluptas nesciunt nobis corrupti, quidem et similique quas a illum', 'Meta Title', 'Meta Keyword', 'Meta Description', '450', '400', 'Hermès', 'uploads/products/6504669036c59.jpg', '23', 0, 0, 1, '2023-09-15 11:13:36', '2023-09-15 11:13:36'),
+(15, 11, 'quod qui cupiditate', 'shirts', 'totam vitae. Perferendis voluptas nesciunt nobis corrupti, quidem et similique quas a illum', 'Meta Title', 'Meta Keyword', 'Meta Description', '450', '400', 'Hermès', 'uploads/products/6504669036c59.jpg', '21', 0, 0, 1, '2023-09-15 11:13:36', '2023-09-30 09:13:48'),
 (16, 11, 'illo dolore mollitia', 'shirts', 'ducimus minus? Eos molestiae earum consequatur ut tempore blanditiis amet, suscipit deleniti minus nulla adipisci possimus sit repellendus ratione rem, voluptates dolorum cupiditate', 'Meta Title', 'Meta Keyword', 'Meta Description', '780', '700', 'Cartier', 'uploads/products/650466e47389b.jpg', '78', 0, 1, 1, '2023-09-15 11:15:00', '2023-09-15 11:15:00'),
 (17, 15, 'cumque debitis illo', 'sports', 'consequuntur ullam et rem enim voluptates aut nemo quasi ipsum consequatur delectus blanditiis, ducimus minus? Eos molestiae earum consequatur ut', 'Meta Title', 'Meta Keyword', 'Meta Description', '400', '230', 'Cartier', 'uploads/products/6504676b001a1.jpg', '23', 0, 1, 1, '2023-09-15 11:17:15', '2023-09-15 11:17:15'),
 (18, 15, 'reiciendis ex iusto', 'sports', 'tempora ipsa nemo corrupti. Error ad officiis quis maxime autem consequatur nemo quidem esse earum! Natus quidem voluptatem est repellendus laboriosam dicta error laborum', 'Meta Title', 'Meta Keyword', 'Meta Description', '800', '670', 'Adidas', 'uploads/products/650467b1c9b55.jpg', '120', 0, 0, 0, '2023-09-15 11:18:25', '2023-09-15 11:18:25'),
@@ -251,7 +260,7 @@ INSERT INTO `products` (`id`, `category_id`, `title`, `slug`, `description`, `me
 (21, 16, 'm et similique q', 'sofa', 'uasi ipsum consequatur delectus blanditiis, ducimus minus? Eos molestiae earum consequatur ut tempore blanditiis amet, suscipit deleniti minus nulla adipisci possimus sit repellendus ratione rem, voluptates dolorum cupiditate temporibus imp', NULL, NULL, NULL, '560', '400', 'Louis Philippe', 'uploads/products/65131b0374ac9.jpg', '45', 0, 0, 0, '2023-09-26 14:55:15', '2023-09-26 14:55:15'),
 (22, 16, 'nulla quod qui cupiditate', 'sofa', 'Excepturi hic iusto omnis odit ad cumque officia laborum eveniet tempora! Dicta aliquid, explicabo sunt ipsam laudantium earum eaque exercitationem nam nesciunt', 'Meta Title', 'Meta Keyword', 'Meta Description', '800', '680', 'Cartier', 'uploads/products/65131b3bd21c5.jpg', '50', 0, 1, 0, '2023-09-26 14:56:11', '2023-09-26 14:56:11'),
 (23, 17, 'temporibus optio', 'tv', 'emporibus optio ipsum odio sit doloremque minus quia, aliquam voluptates necessitatibus ipsa nostrum non ab aperiam cumque debitis illo dolore mollitia excepturi deserunt culpa? Quo architecto reprehenderit nulla quod qui cupiditate?', 'Meta Title', 'Meta Keyword', 'Meta Description', '7000', '6700', 'samsung', 'uploads/products/65131b6fb1fa9.jpg', '60', 0, 1, 1, '2023-09-26 14:57:03', '2023-09-26 14:57:03'),
-(25, 17, 'temporibus impedit', 'tv', 'eritatis aliquam laboriosam officiis nemo, reiciendis ex iusto harum aut beatae quod rem! Magni omnis accusantium sapiente? Dolorem culpa vero similique perferendis molestiae aliquid in blanditiis, illum nihil sit repudiandae accusamus qua', 'Meta Title', 'Meta Keyword', 'Meta Description', '6000', '5800', 'lg', 'uploads/products/65131c3215422.jpg', '50', 0, 0, 1, '2023-09-26 15:00:18', '2023-09-26 15:00:18'),
+(25, 17, 'temporibus impedit', 'tv', 'eritatis aliquam laboriosam officiis nemo, reiciendis ex iusto harum aut beatae quod rem! Magni omnis accusantium sapiente? Dolorem culpa vero similique perferendis molestiae aliquid in blanditiis, illum nihil sit repudiandae accusamus qua', 'Meta Title', 'Meta Keyword', 'Meta Description', '6000', '5800', 'lg', 'uploads/products/65131c3215422.jpg', '49', 0, 0, 1, '2023-09-26 15:00:18', '2023-09-30 09:13:48'),
 (26, 17, 'Quae qui sequi', 'tv', 'or nulla, fugit soluta! Quae qui sequi, eligendi aliquam beatae earum, maiores magnam amet nesciunt accusamus mollitia nulla minima porro quibusdam, cumque volupt', NULL, NULL, NULL, '4000', '3400', 'toshiba', 'uploads/products/65131c669d336.jpg', '56', 0, 0, 1, '2023-09-26 15:01:10', '2023-09-26 15:01:10');
 
 -- --------------------------------------------------------
@@ -278,7 +287,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_as`, `remember_token`, `created_at`, `updated_at`) VALUES
 (2, 'admin', 'admin@admin.com', NULL, '$2y$10$.SYMYLHhFzA17yv1wGpBQezZLZD0VDgaq6rUS5jdSKvebKBIMYqU.', 1, NULL, '2023-09-01 18:41:13', '2023-09-01 18:41:13'),
-(3, 'muhammed92', 'muhammed@gmail.com', NULL, '$2y$10$fgExr1IE4qWgLnpfrZK2mOwxy08LOv4jlXiupOPxBNCfrpry8iVOa', 0, NULL, '2023-09-02 06:30:09', '2023-09-02 06:30:09');
+(3, 'muhammed92', 'muhammed@gmail.com', NULL, '$2y$10$fgExr1IE4qWgLnpfrZK2mOwxy08LOv4jlXiupOPxBNCfrpry8iVOa', 0, NULL, '2023-09-02 06:30:09', '2023-09-02 06:30:09'),
+(4, 'guest', 'guest@yahoo.com', NULL, '$2y$10$RsW4EA2Rfif9ajeB46w5Gu4bk4eXCvgcOE5pe9IK0r.bco2wBnwly', 0, NULL, '2023-09-30 09:54:30', '2023-09-30 09:54:30');
 
 --
 -- Indexes for dumped tables
@@ -356,7 +366,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -380,19 +390,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -404,7 +414,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

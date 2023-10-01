@@ -87,4 +87,14 @@ class OrderController extends Controller
             'data' => $orderItem
         ], 200);
     }
+    public function updateOrder(Order $order, Request $request)
+    {
+        $order->update(['status' => $request->status]);
+        return response()->json(['message' => 'order updated successfully']);
+    }
+    public function deleteOrder(Order $order)
+    {
+        $order->delete();
+        return response()->json(['message' => 'order deleted successfully']);
+    }
 }

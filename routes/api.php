@@ -52,3 +52,5 @@ Route::get('/product/{id}', [ProductController::class, 'show']);
 
 Route::get('/orders', [OrderController::class, 'getOrders']);
 Route::get('/orderItems/{orderItem}', [OrderController::class, 'getOrderItems']);
+Route::post('/edit-order-status/{order}', [OrderController::class, 'updateOrder']);
+Route::delete('/delete-order/{order}', [OrderController::class, 'deleteOrder']);

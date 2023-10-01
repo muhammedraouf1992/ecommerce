@@ -131,11 +131,6 @@ const SingleProduct = () => {
                                 </Col>
                             </Row>
                         )}
-                        <div>
-                            <button className="btn btn-danger mt-3">
-                                Add to wishlist
-                            </button>
-                        </div>
                     </Col>
                 </Row>
             </Container>
