@@ -12,11 +12,14 @@ const MasterLayout = () => {
     if (!token) {
         return <Navigate to={"/login"} />;
     }
+    if (!user) {
+        return <Navigate to="/login" />;
+    }
     if (user.role_as === 0) {
         return <Navigate to="/" />;
     }
     console.log(user);
-    useEffect;
+
     return (
         <div id="page-top">
             <div id="wrapper">

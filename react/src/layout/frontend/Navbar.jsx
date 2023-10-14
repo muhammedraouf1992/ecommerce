@@ -40,10 +40,11 @@ function NavScrollExample() {
                         <Link className="mx-2" to="/cart">
                             Cart
                         </Link>
-
-                        <Link className="mx-2" to="/admin">
-                            Admin
-                        </Link>
+                        {user.role_as === 1 && (
+                            <Link className="mx-2" to="/admin">
+                                Admin
+                            </Link>
+                        )}
 
                         {!token ? (
                             <>

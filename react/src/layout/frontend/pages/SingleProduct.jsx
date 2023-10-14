@@ -21,16 +21,13 @@ const SingleProduct = () => {
             .then(({ data }) => {
                 setFetchData(data.data);
                 setLoading(false);
-                console.log(data.data);
             })
             .catch((error) => {
                 console.log(error);
                 setLoading(false);
             });
     }, []);
-    if (loading) {
-        return <h1>loading.......</h1>;
-    }
+
     const handleMinus = () => {
         if (productCount > 1) {
             setProductCount((prev) => prev - 1);
@@ -69,6 +66,9 @@ const SingleProduct = () => {
                 }
             });
     };
+    if (loading) {
+        return <h1>loading.......</h1>;
+    }
     return (
         <>
             <Container className="space" fluid="xl">

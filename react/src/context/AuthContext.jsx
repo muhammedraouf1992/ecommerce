@@ -1,10 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import axiosClient from "../axios";
+import { json } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-    const [user, setUser] = useState({});
+    const [user, _setUser] = useState(JSON.parse(localStorage.getItem("USER")));
     const [token, _setToken] = useState(localStorage.getItem("ACCESS_TOKEN"));
     const [loading, setLoading] = useState(false);
     const [fetchedData, setFetchData] = useState([]);
@@ -18,6 +19,14 @@ export const AuthContextProvider = ({ children }) => {
             localStorage.setItem("ACCESS_TOKEN", token);
         } else {
             localStorage.removeItem("ACCESS_TOKEN");
+        }
+    };
+    const setUser = (user) => {
+        _setUser(user);
+        if (user) {
+            localStorage.setItem("USER", JSON.stringify(user));
+        } else {
+            localStorage.removeItem("USER");
         }
     };
 

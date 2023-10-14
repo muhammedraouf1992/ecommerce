@@ -9,8 +9,8 @@ import PromotionComponent from "../components/PromotionComponent";
 import { useAuthContext } from "../../../context/AuthContext";
 
 const HomePage = () => {
-    const { user } = useAuthContext();
-    console.log(user);
+    const { user, token } = useAuthContext();
+    console.log(user, token);
     return (
         <div>
             <Banner />

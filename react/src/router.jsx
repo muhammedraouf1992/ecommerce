@@ -81,51 +81,48 @@ const router = createBrowserRouter([
         element: <Register />,
     },
     {
-        path: "/admin",
+        path: "admin",
         element: <MasterLayout />,
         children: [
             {
-                path: "/admin",
-                element: <Navigate to={"/admin/dashboard"} />,
-            },
-            {
-                path: "/admin/dashboard",
+                index: true,
+                path: "dashboard",
                 element: <Dashboard />,
             },
             {
-                path: "/admin/profile",
+                path: "profile",
                 element: <Profile />,
             },
             {
-                path: "/admin/category",
+                path: "category",
                 element: <Category />,
             },
             {
-                path: "/admin/category/add",
+                path: "category/add",
                 element: <AddCategory />,
             },
             {
-                path: "/admin/category/edit/:id",
+                path: "category/edit/:id",
                 element: <EditCategory />,
             },
             {
-                path: "/admin/product",
+                path: "product",
                 element: <Products />,
             },
             {
-                path: "/admin/product/add",
+                path: "product/add",
                 element: <AddProduct />,
             },
             {
-                path: "/admin/product/edit/:id",
+                path: "product/edit/:id",
                 element: <EditProduct />,
             },
             {
-                path: "/admin/order/edit/:id",
+                path: "order/edit/:id",
                 element: <OrderItem />,
             },
             {
-                path: "/admin/orders",
+                path: "orders",
                 element: <Orders />,
             },
         ],

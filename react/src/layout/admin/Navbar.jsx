@@ -12,7 +12,6 @@ const Navbar = () => {
         axiosClient
             .get("/user", data)
             .then((data) => {
-                console.log(data.data);
                 setData(data.data);
                 setLoading(false);
             })
