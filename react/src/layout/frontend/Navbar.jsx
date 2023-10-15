@@ -40,7 +40,7 @@ function NavScrollExample() {
                         <Link className="mx-2" to="/cart">
                             Cart
                         </Link>
-                        {user.role_as === 1 && (
+                        {user?.role_as === 1 && (
                             <Link className="mx-2" to="/admin">
                                 Admin
                             </Link>

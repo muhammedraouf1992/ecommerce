@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosClient = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: "https://touchy-misalignment.000webhostapp.com/api",
 });
 
 axiosClient.interceptors.request.use((config) => {
