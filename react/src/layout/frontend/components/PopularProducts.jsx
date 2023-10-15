@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/esm/Col";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
@@ -7,9 +7,15 @@ import { AiFillStar } from "react-icons/ai";
 import { useAuthContext } from "../../../context/AuthContext";
 
 const PopularProducts = () => {
-    const { getFetcher, fetchedData, loading } = useAuthContext();
+    const { getFetcher, loading } = useAuthContext();
+    const [fetchedData, setFetchedData] = useState([]);
     useEffect(() => {
-        getFetcher("/product");
+        fetch("https://touchy-misalignment.000webhostapp.com/api/product")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.data);
+                setFetchedData(data.data);
+            });
     }, []);
     const filteredData = fetchedData.filter((product) => {
         return product.popular === 1;
@@ -26,7 +32,7 @@ const PopularProducts = () => {
                         <div className="p-2 border product-card rounded-5">
                             <div className="product-card-image ">
                                 <img
-                                    src={`http://127.0.0.1:8000/${data.image}`}
+                                    src={`https://touchy-misalignment.000webhostapp.com/${data.image}`}
                                     alt=""
                                     className="rounded-5"
                                 />
